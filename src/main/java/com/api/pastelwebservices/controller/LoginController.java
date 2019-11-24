@@ -52,6 +52,6 @@ public class LoginController {
 			
 		}
 		
-		return new ResponseEntity<>(hashMap, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(hashMap, HttpStatus.OK);
 	}
 }
