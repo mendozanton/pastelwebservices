@@ -3,6 +3,7 @@ package com.api.pastelwebservices.controller;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
+import javax.sound.midi.MidiDevice.Info;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.pastelwebservices.entity.Usuario;
+import com.api.pastelwebservices.model.InfoObj;
 import com.api.pastelwebservices.model.UserCredential;
 import com.api.pastelwebservices.service.UsuarioService;
 
@@ -27,19 +29,29 @@ public class LoginController {
 	private UsuarioService service;
 	
 	@PostMapping
-	public ResponseEntity<UserCredential> credenciales(@Valid @RequestBody UserCredential login) {
+	public ResponseEntity<HashMap<String, Object>> credenciales(@Valid @RequestBody UserCredential login) {
+		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();
 		UserCredential loginResponse = new UserCredential("not_found", "not_found");
-		
+		InfoObj info = new InfoObj();
 		Usuario usuario = service.buscar(login.getEmail(), login.getPassword());
+		
+		hashMap.put("content", loginResponse);
+		hashMap.put("info", info);
+		
 		if (usuario != null) {
 			loginResponse.setEmail("found");
 			
+			hashMap.put("content", loginResponse);
+			
 			if (usuario.getPassword().equals(login.getPassword())) {
 				loginResponse.setPassword("found");
-				return new ResponseEntity<>(loginResponse, HttpStatus.OK);
+				
+				hashMap.put("content", loginResponse);
+				return new ResponseEntity<>(hashMap, HttpStatus.OK);
 			}
 			
 		}
-		return new ResponseEntity<>(loginResponse, HttpStatus.NOT_FOUND);
+		
+		return new ResponseEntity<>(hashMap, HttpStatus.NOT_FOUND);
 	}
 }
