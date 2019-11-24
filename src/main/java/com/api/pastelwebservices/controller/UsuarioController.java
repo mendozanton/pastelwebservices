@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.pastelwebservices.model.Usuario;
-import com.api.pastelwebservices.repo.UsuarioRepo;
+import com.api.pastelwebservices.entity.Usuario;
+import com.api.pastelwebservices.service.UsuarioService;
 
 
 @RestController
-@RequestMapping("/")
-public class DemoController {
+@RequestMapping("/api/usuario")
+public class UsuarioController {
 	@Autowired
-	private UsuarioRepo dao;
+	private UsuarioService service;
 	
 	
 	@GetMapping
 	public List<Usuario> getUsuario() {
-		return dao.findAll();
+		return service.listar();
 	}
 }
