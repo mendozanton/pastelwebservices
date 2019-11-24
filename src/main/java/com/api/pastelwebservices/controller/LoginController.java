@@ -28,7 +28,7 @@ public class LoginController {
 	
 	@PostMapping
 	public ResponseEntity<UserCredential> credenciales(@Valid @RequestBody UserCredential login) {
-		UserCredential loginResponse = new UserCredential("notfound", "notfound");
+		UserCredential loginResponse = new UserCredential("not_found", "not_found");
 		
 		Usuario usuario = service.buscar(login.getEmail(), login.getPassword());
 		if (usuario != null) {
