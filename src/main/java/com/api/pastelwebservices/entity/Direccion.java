@@ -1,6 +1,5 @@
 package com.api.pastelwebservices.entity;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -12,45 +11,38 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table
 public class Direccion {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_dir")
 	private Long idDireccion;
 	
-	@Column(length = 50, nullable = false)
-	private String distrito;
-	
-	@Column(length = 20, nullable = false)
+	@Column(name = "ciu_dir", length = 20, nullable = false)
 	private String ciudad;
 	
-	@Column(length = 35)
+	@Column(name = "aven_dir", length = 35)
 	private String avenida;
 	
-	@Column(length = 20)
+	@Column(name = "urb_dir", length = 20)
 	private String urbanizacion;
 	
-	@Column(length = 30)
+	@Column(name = "calle_dir", length = 30)
 	private String calle;
 	
-	@Column(length = 30)
+	@Column(name = "dep_dir", length = 30)
 	private String departamento;
 	
-	@Column(length = 20)
+	@Column(name = "lot_dir", length = 20)
 	private String lote;
 	
-	@Column(columnDefinition = "smallint")
-	private Integer piso;
-	
-	@Column(length = 10, nullable = false)
+	@Column(name = "cod_pos_dir", length = 10, nullable = false)
 	private Integer codigoPostal;
 	
-	@Column(length = 100, nullable = false)
+	@Column(name = "ref_dir", length = 100, nullable = false)
 	private String referencia;
 	
 	@OneToMany(mappedBy = "direccion")
@@ -60,35 +52,12 @@ public class Direccion {
 	public Direccion() {
 	}
 
-	public Direccion(Long idDireccion, String distrito, String ciudad, String avenida, String urbanizacion,
-			String calle, String departamento, String lote, Integer piso, Integer codigoPostal, String referencia) {
-		this.idDireccion = idDireccion;
-		this.distrito = distrito;
-		this.ciudad = ciudad;
-		this.avenida = avenida;
-		this.urbanizacion = urbanizacion;
-		this.calle = calle;
-		this.departamento = departamento;
-		this.lote = lote;
-		this.piso = piso;
-		this.codigoPostal = codigoPostal;
-		this.referencia = referencia;
-	}
-
 	public Long getIdDireccion() {
 		return idDireccion;
 	}
 
 	public void setIdDireccion(Long idDireccion) {
 		this.idDireccion = idDireccion;
-	}
-
-	public String getDistrito() {
-		return distrito;
-	}
-
-	public void setDistrito(String distrito) {
-		this.distrito = distrito;
 	}
 
 	public String getCiudad() {
@@ -139,14 +108,6 @@ public class Direccion {
 		this.lote = lote;
 	}
 
-	public Integer getPiso() {
-		return piso;
-	}
-
-	public void setPiso(Integer piso) {
-		this.piso = piso;
-	}
-
 	public Integer getCodigoPostal() {
 		return codigoPostal;
 	}
@@ -163,14 +124,5 @@ public class Direccion {
 		this.referencia = referencia;
 	}
 
-	public Set<Usuario> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(Set<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}
-	
-	
 	
 }
