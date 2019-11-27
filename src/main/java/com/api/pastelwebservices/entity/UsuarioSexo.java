@@ -20,7 +20,7 @@ public class UsuarioSexo {
 	@Column(name = "id_sex")
 	private Long idUsuarioSexo;
 	
-	@Column(name = "nom_sex")
+	@Column(name = "nom_sex", nullable = false)
 	private String nombre;
 
 	@OneToMany(mappedBy = "sexo")

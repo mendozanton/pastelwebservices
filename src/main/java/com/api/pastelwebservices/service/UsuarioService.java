@@ -35,5 +35,12 @@ public class UsuarioService {
 		
 		return null;
 	}
+	
+	public Usuario buscar(Long id) {
+		return dao.findByIdUsuario(id);
+	}
 
+	public Usuario guardar(Usuario usuario) {
+		return dao.save(usuario);
+	}
 }

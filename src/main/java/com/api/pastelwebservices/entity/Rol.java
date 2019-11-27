@@ -32,12 +32,18 @@ public class Rol {
 	@JsonIgnoreProperties("roles")
 	private Set<Perfil> perfiles;
 	
-	@OneToMany(mappedBy = "rol")
+	@OneToMany(mappedBy = "rol",cascade = CascadeType.ALL)
 	@JsonIgnoreProperties("rol")
 	private Set<Usuario> usuarios;
 	
 	public Rol() {
 	}
+
+
+	public Rol(Long idRol) {
+		this.idRol = idRol;
+	}
+
 
 	public Long getIdRol() {
 		return idRol;
@@ -62,6 +68,16 @@ public class Rol {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
+
+/*
+	public Set<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+
+	public void setUsuarios(Set<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+	*/
 	
 }

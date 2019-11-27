@@ -31,7 +31,7 @@ public class LoginController {
 	@PostMapping
 	public ResponseEntity<HashMap<String, Object>> credenciales(@Valid @RequestBody UserCredential login) {
 		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();
-		UserCredential loginResponse = new UserCredential("not_found", "not_found");
+		UserCredential loginResponse = new UserCredential(null, "not_found", "not_found");
 		InfoObj info = new InfoObj();
 		Usuario usuario = service.buscar(login.getEmail(), login.getPassword());
 		
@@ -44,6 +44,7 @@ public class LoginController {
 			hashMap.put("content", loginResponse);
 			
 			if (usuario.getPassword().equals(login.getPassword())) {
+				loginResponse.setId(usuario.getIdUsuario());;
 				loginResponse.setPassword("found");
 				
 				hashMap.put("content", loginResponse);

@@ -51,16 +51,29 @@ public class Usuario {
 	@JsonIgnoreProperties("usuarios")
 	private Direccion direccion;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.ALL})
 	@JoinColumn(name = "id_rol", foreignKey = @ForeignKey(name = "fk_rol_usuario"))
 	@JsonIgnoreProperties("usuarios")
 	private Rol rol;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.ALL})
 	@JoinColumn(name = "id_per", foreignKey = @ForeignKey(name = "fk_perfil_usuario"))
 	@JsonIgnoreProperties("usuarios")
 	private Perfil perfil;
 	
+	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.ALL})
+	@JoinColumn(name = "id_est", foreignKey = @ForeignKey(name = "fk_estado_usuario"))
+	@JsonIgnoreProperties("usuarios")
+	private Estado estado;
+	
+	
+	public Usuario(String nombre, String apellido, String email, String password) {
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.password = password;
+	}
+
 	public Usuario() {
 	}
 
@@ -134,6 +147,30 @@ public class Usuario {
 
 	public void setDireccion(Direccion direccion) {
 		this.direccion = direccion;
+	}
+
+	public Rol getRol() {
+		return rol;
+	}
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
+
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 
