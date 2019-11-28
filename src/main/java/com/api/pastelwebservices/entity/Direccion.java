@@ -2,6 +2,7 @@ package com.api.pastelwebservices.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -48,16 +49,20 @@ public class Direccion {
 	@Column(name = "ref_dir", length = 100, nullable = false)
 	private String referencia;
 	
-	@OneToMany(mappedBy = "direccion")
+	@OneToMany(mappedBy = "direccion", cascade = {CascadeType.MERGE, CascadeType.ALL})
 	@JsonIgnoreProperties("direccion")
 	private Set<Usuario> usuarios;
 	
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.ALL})
 	@JoinColumn(name = "id_dis", foreignKey = @ForeignKey(name = "fk_distrito_direccion"))
 	@JsonIgnoreProperties("direcciones")
 	private DireccionDistrito distrito;
 	
 	public Direccion() {
+	}
+
+	public Direccion(Long idDireccion) {
+		this.idDireccion = idDireccion;
 	}
 
 	public Long getIdDireccion() {

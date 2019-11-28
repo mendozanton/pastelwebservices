@@ -2,6 +2,7 @@ package com.api.pastelwebservices.entity;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,14 +20,19 @@ public class Estado {
 	@Column(name = "id_est")
 	private Long idEstado;
 	
+	@Column(name = "nom_est", length = 15)
 	private String nombre;
 	
-	@Column(name = "des_est")
+	@Column(name = "des_est", length = 30)
 	private String descripcion;
 	
-	@OneToMany(mappedBy = "estado")
+	@OneToMany(mappedBy = "estado",cascade = {CascadeType.MERGE, CascadeType.ALL})
 	@JsonIgnoreProperties("estado")
 	private Set<Usuario> usuarios;
+	
+	@OneToMany(mappedBy = "estado",cascade = {CascadeType.MERGE, CascadeType.ALL})
+	@JsonIgnoreProperties("estado")
+	private Set<Producto> productos;
 
 	public Estado() {
 	}

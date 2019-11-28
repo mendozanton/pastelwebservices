@@ -43,4 +43,8 @@ public class UsuarioService {
 	public Usuario guardar(Usuario usuario) {
 		return dao.save(usuario);
 	}
+	
+	public Usuario actualizar(Usuario usuario) {
+		return dao.save(usuario);
+	}
 }

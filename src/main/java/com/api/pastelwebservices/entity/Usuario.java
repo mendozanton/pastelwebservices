@@ -1,5 +1,7 @@
 package com.api.pastelwebservices.entity;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,10 +25,10 @@ public class Usuario {
 	@Column(name = "id_usu")
 	private Long idUsuario;
 	
-	@Column(name = "nom_usu",length = 10, nullable = false)
+	@Column(name = "nom_usu",length = 20, nullable = false)
 	private String nombre;
 	
-	@Column(name = "ape_usu",length = 10, nullable = false)
+	@Column(name = "ape_usu",length = 30, nullable = false)
 	private String apellido;
 	
 	@Column(name = "eda_usu",columnDefinition = "numeric", length = 2)
@@ -41,17 +43,17 @@ public class Usuario {
 	@Column(name = "pass_usu",length = 12, nullable = false)
 	private String password;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.ALL})
 	@JoinColumn(name = "id_sex", foreignKey = @ForeignKey(name = "fk_sexo_usuario"))
 	@JsonIgnoreProperties("usuarios")
 	private UsuarioSexo sexo;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.ALL})
 	@JoinColumn(name = "id_dir", foreignKey = @ForeignKey(name = "fk_direccion_usuario"))
 	@JsonIgnoreProperties("usuarios")
 	private Direccion direccion;
 	
-	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.ALL})
+	@ManyToOne(cascade =  CascadeType.ALL)
 	@JoinColumn(name = "id_rol", foreignKey = @ForeignKey(name = "fk_rol_usuario"))
 	@JsonIgnoreProperties("usuarios")
 	private Rol rol;
@@ -66,6 +68,10 @@ public class Usuario {
 	@JsonIgnoreProperties("usuarios")
 	private Estado estado;
 	
+	@OneToMany(mappedBy = "usuario",cascade = {CascadeType.MERGE, CascadeType.ALL})
+	@JsonIgnoreProperties("usuario")
+	private Set<Pedido> pedidos;
+	
 	
 	public Usuario(String nombre, String apellido, String email, String password) {
 		this.nombre = nombre;
@@ -73,6 +79,20 @@ public class Usuario {
 		this.email = email;
 		this.password = password;
 	}
+
+	public Usuario(Long idUsuario, String nombre, String apellido, Integer edad, String email, Integer telefono,
+			String password, Direccion direccion) {
+		this.idUsuario = idUsuario;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.edad = edad;
+		this.email = email;
+		this.telefono = telefono;
+		this.password = password;
+		this.direccion = direccion;
+	}
+
+
 
 	public Usuario() {
 	}
@@ -171,6 +191,14 @@ public class Usuario {
 
 	public void setEstado(Estado estado) {
 		this.estado = estado;
+	}
+
+	public Set<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(Set<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 
 

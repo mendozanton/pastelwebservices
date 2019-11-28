@@ -12,15 +12,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.api.pastelwebservices.entity.Direccion;
 import com.api.pastelwebservices.entity.Estado;
 import com.api.pastelwebservices.entity.Rol;
 import com.api.pastelwebservices.entity.Usuario;
 import com.api.pastelwebservices.model.InfoObj;
+import com.api.pastelwebservices.model.UserActualizar;
 import com.api.pastelwebservices.model.UserRegistrar;
+import com.api.pastelwebservices.service.DireccionService;
 import com.api.pastelwebservices.service.UsuarioService;
 
 
@@ -29,7 +33,8 @@ import com.api.pastelwebservices.service.UsuarioService;
 public class UsuarioController {
 	@Autowired
 	private UsuarioService service;
-	
+	@Autowired
+	private DireccionService service2;
 	
 	@GetMapping
 	public ResponseEntity<HashMap<String, Object>> getUsuario() {
@@ -64,4 +69,23 @@ public class UsuarioController {
 		
 		return new ResponseEntity<>(_usu,HttpStatus.OK);
 	}
+	
+	@PutMapping(value = "/actualizar/cliente")
+	public ResponseEntity<Usuario> updateUsuarioLogin(@Valid @RequestBody UserActualizar usu_new) {
+		
+		Usuario usu_bd = service.buscar(usu_new.getIdUsuario());
+		usu_bd.setNombre(usu_new.getNombre());
+		usu_bd.setApellido(usu_new.getApellido());
+		usu_bd.setEmail(usu_new.getEmail());
+		usu_bd.setEdad(usu_new.getEdad());
+		usu_bd.setTelefono(usu_bd.getTelefono());
+		
+		Direccion dir= service2.buscar(usu_new.getIdDireccion());
+		usu_bd.setDireccion(dir);
+		
+		Usuario _usu =service.actualizar(usu_bd);
+		if (_usu == null) return new ResponseEntity<>(_usu,HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(_usu,HttpStatus.OK);
+	}
+	
 }

@@ -7,5 +7,5 @@ import com.api.pastelwebservices.entity.Direccion;
 
 @Repository
 public interface DireccionRepo extends JpaRepository<Direccion, Long>{
-
+	public Direccion findByIdDireccion(Long idDireccion);
 }
