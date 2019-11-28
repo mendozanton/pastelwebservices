@@ -2,11 +2,17 @@ package com.api.pastelwebservices.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Preferencia {
@@ -25,6 +31,11 @@ public class Preferencia {
 	@Column(name = "come_pre")
 	private String comentario;
 
+	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.ALL})
+	@JoinColumn(name = "id_usu", foreignKey = @ForeignKey(name = "fk_usuario_preferencia"))
+	@JsonIgnoreProperties("preferencias")
+	private Usuario usuario;
+	
 	public Preferencia() {
 	}
 

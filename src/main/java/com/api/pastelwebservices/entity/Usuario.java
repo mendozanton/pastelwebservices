@@ -72,6 +72,10 @@ public class Usuario {
 	@JsonIgnoreProperties("usuario")
 	private Set<Pedido> pedidos;
 	
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("usuario")
+	private Set<Preferencia> preferencias;
+	
 	
 	public Usuario(String nombre, String apellido, String email, String password) {
 		this.nombre = nombre;
