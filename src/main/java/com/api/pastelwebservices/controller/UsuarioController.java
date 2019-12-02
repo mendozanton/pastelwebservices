@@ -1,5 +1,6 @@
 package com.api.pastelwebservices.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.support.DaoSupport;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,9 +25,11 @@ import com.api.pastelwebservices.entity.Rol;
 import com.api.pastelwebservices.entity.Usuario;
 import com.api.pastelwebservices.model.InfoObj;
 import com.api.pastelwebservices.model.UserActualizar;
+import com.api.pastelwebservices.model.UserModel;
 import com.api.pastelwebservices.model.UserRegistrar;
 import com.api.pastelwebservices.service.DireccionService;
 import com.api.pastelwebservices.service.UsuarioService;
+import com.api.pastelwebservices.util.ConversionEntityModel;
 
 
 @RestController
@@ -37,10 +41,15 @@ public class UsuarioController {
 	private DireccionService service2;
 	
 	@GetMapping
-	public ResponseEntity<HashMap<String, Object>> getUsuario() {
+	public ResponseEntity<HashMap<String, Object>> getUsuarios() {
 		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();
-		List<Usuario> usuarios = service.listar();
-		hashMap.put("content", usuarios);
+		List<UserModel> usuariosModel = new ArrayList<UserModel>();
+		
+		for (Usuario usuario : service.listar()) {
+			usuariosModel.add(ConversionEntityModel.UsuarioToModel(usuario));
+		}
+		
+		hashMap.put("content", usuariosModel);
 		return new ResponseEntity<>(hashMap, HttpStatus.OK);
 	}
 	
@@ -48,22 +57,18 @@ public class UsuarioController {
 	public ResponseEntity<HashMap<String, Object>> getUsuarioId(@PathVariable("id") Long id) {
 		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();
 		Usuario usuario = service.buscar(id);
-		hashMap.put("content", usuario);
+		UserModel usuariosModel = ConversionEntityModel.UsuarioToModel(usuario);
+		hashMap.put("content", usuariosModel);
 		return new ResponseEntity<>(hashMap, HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "/crear/cliente")
 	public ResponseEntity<Usuario> saveUsuarioLogin(@Valid @RequestBody UserRegistrar newUsuario) {
 	
-		Usuario _usu = new Usuario(newUsuario.getNombre(),newUsuario.getApellido(),newUsuario.getEmail(),newUsuario.getPassword());
-		Rol _rol = new Rol(new Long(1));
-		Estado _est = new  Estado(new Long(1));
-		_usu.setRol(_rol);
-		_usu.setEstado(_est);
-		_usu = service.guardar(_usu);
-		if (_usu == null) return new ResponseEntity<>(_usu,HttpStatus.BAD_REQUEST);
+		service.registrarUsuario(newUsuario.getNombre(), newUsuario.getApellido(), newUsuario.getEmail(), newUsuario.getPassword(), null, null, null);
 		
-		return new ResponseEntity<>(_usu,HttpStatus.OK);
+		
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	@PutMapping(value = "/actualizar/cliente")

@@ -1,5 +1,6 @@
 package com.api.pastelwebservices.entity;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -28,8 +30,19 @@ public class Mensaje {
 	@OneToMany(mappedBy = "mensaje", cascade = {CascadeType.MERGE, CascadeType.ALL})
 	@JsonIgnoreProperties("mensaje")
 	private List<Error> errores;
+	
+	@Transient
+	private HashMap<String, Object> data;
 
 	public Mensaje() {
+	}
+
+	public HashMap<String, Object> getData() {
+		return data;
+	}
+
+	public void setData(HashMap<String, Object> data) {
+		this.data = data;
 	}
 
 	public Long getCodigo() {

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.api.pastelwebservices.entity.Mensaje;
 import com.api.pastelwebservices.entity.Usuario;
 import com.api.pastelwebservices.model.UserCredential;
 import com.api.pastelwebservices.service.ErrorService;
@@ -36,14 +37,21 @@ public class LoginController {
 		
 		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();		
 		Usuario usuario = service_usu.buscar(login.getEmail(), login.getPassword());
-		
+		Mensaje mensaje = new Mensaje();
 		if (usuario == null) {
-			hashMap.put("content", service_men.buscar(new Long(1)));
+			mensaje = service_men.buscar(new Long(1));
+			hashMap.put("content", mensaje);
 		} else {
 			if (usuario.getPassword().equals(login.getPassword())) {
-				hashMap.put("content", service_men.buscar(new Long(2)));
+				mensaje = service_men.buscar(new Long(2));
+				HashMap<String, Object> hashMap2 = new LinkedHashMap<String, Object>();
+				hashMap2.put("idUsuario", usuario.getIdUsuario());
+				mensaje.setData(hashMap2);
+				hashMap.put("content", mensaje);
+				
 			} else {
-				hashMap.put("content", service_men.buscarErrorEspecifico(new Long(2)));
+				mensaje = service_men.buscarErrorEspecifico(new Long(2));
+				hashMap.put("content", mensaje);
 			}
 		}
 		

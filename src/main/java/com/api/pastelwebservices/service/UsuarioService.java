@@ -40,6 +40,9 @@ public class UsuarioService {
 		return dao.findByIdUsuario(id);
 	}
 
+	public void registrarUsuario(String nombre, String apellido, String email, String password, Long idRol, Long idPer, Long idEst) {
+		dao.registrarUsuarioBasico(nombre, apellido, email, password, idRol, idPer, idEst);
+	}
 	public Usuario guardar(Usuario usuario) {
 		return dao.save(usuario);
 	}
