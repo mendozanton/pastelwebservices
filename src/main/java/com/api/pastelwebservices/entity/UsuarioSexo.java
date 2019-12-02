@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -21,6 +21,7 @@ public class UsuarioSexo {
 	private Long idUsuarioSexo;
 	
 	@Column(name = "nom_sex", nullable = false)
+	@NotNull
 	private String nombre;
 
 	@OneToMany(mappedBy = "sexo")
@@ -51,6 +52,14 @@ public class UsuarioSexo {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public Set<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(Set<Usuario> usuarios) {
+		this.usuarios = usuarios;
 	}
 
 	

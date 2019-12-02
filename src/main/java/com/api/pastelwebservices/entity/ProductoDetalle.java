@@ -58,6 +58,14 @@ public class ProductoDetalle {
 	public void setSabor(String sabor) {
 		this.sabor = sabor;
 	}
+
+	public Producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
 	
 	
 }

@@ -5,7 +5,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -25,22 +23,25 @@ public class Direccion {
 	@Column(name = "id_dir")
 	private Long idDireccion;
 	
-	@Column(name = "ciu_dir", length = 20, nullable = false)
-	private String ciudad;
-	
-	@Column(name = "aven_dir", length = 35)
+	@Column(name = "aven_dir", length = 50)
 	private String avenida;
 	
-	@Column(name = "urb_dir", length = 20)
+	@Column(name = "urb_dir", length = 50)
 	private String urbanizacion;
 	
-	@Column(name = "calle_dir", length = 30)
+	@Column(name = "calle_dir", length = 50)
 	private String calle;
 	
-	@Column(name = "dep_dir", length = 30)
+	@Column(name = "sect_dir", length = 50)
+	private String sector;
+	
+	@Column(name = "manz_dir", length = 50)
+	private String manzana;
+	
+	@Column(name = "dep_dir", length = 50)
 	private String departamento;
 	
-	@Column(name = "lot_dir", length = 20)
+	@Column(name = "lot_dir", length = 10)
 	private String lote;
 	
 	@Column(name = "cod_pos_dir", length = 10, nullable = false)
@@ -61,6 +62,38 @@ public class Direccion {
 	public Direccion() {
 	}
 
+	public String getSector() {
+		return sector;
+	}
+
+	public void setSector(String sector) {
+		this.sector = sector;
+	}
+
+	public String getManzana() {
+		return manzana;
+	}
+
+	public void setManzana(String manzana) {
+		this.manzana = manzana;
+	}
+
+	public Set<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(Set<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	public DireccionDistrito getDistrito() {
+		return distrito;
+	}
+
+	public void setDistrito(DireccionDistrito distrito) {
+		this.distrito = distrito;
+	}
+
 	public Direccion(Long idDireccion) {
 		this.idDireccion = idDireccion;
 	}
@@ -73,13 +106,6 @@ public class Direccion {
 		this.idDireccion = idDireccion;
 	}
 
-	public String getCiudad() {
-		return ciudad;
-	}
-
-	public void setCiudad(String ciudad) {
-		this.ciudad = ciudad;
-	}
 
 	public String getAvenida() {
 		return avenida;

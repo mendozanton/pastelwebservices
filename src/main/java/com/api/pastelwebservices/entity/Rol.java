@@ -8,10 +8,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -29,7 +29,8 @@ public class Rol {
 	private String descripcion;
 
 	@ManyToMany(mappedBy = "roles",cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("roles")
+	//@JsonIgnoreProperties("roles")
+	@JsonIgnore
 	private Set<Perfil> perfiles;
 	
 	@OneToMany(mappedBy = "rol",cascade = CascadeType.ALL)
@@ -69,7 +70,16 @@ public class Rol {
 		this.descripcion = descripcion;
 	}
 
-/*
+	public Set<Perfil> getPerfiles() {
+		return perfiles;
+	}
+
+
+	public void setPerfiles(Set<Perfil> perfiles) {
+		this.perfiles = perfiles;
+	}
+
+
 	public Set<Usuario> getUsuarios() {
 		return usuarios;
 	}
@@ -78,6 +88,6 @@ public class Rol {
 	public void setUsuarios(Set<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
-	*/
+	
 	
 }

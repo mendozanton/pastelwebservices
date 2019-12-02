@@ -37,6 +37,14 @@ public class PedidoPrioridad {
 		this.idPedidoPrioridad = idPedidoPrioridad;
 	}
 
+	public Set<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(Set<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}

@@ -5,8 +5,6 @@ import org.springframework.stereotype.Repository;
 
 import com.api.pastelwebservices.entity.Usuario;
 
-import java.util.List;
-
 @Repository
 public interface UsuarioRepo extends JpaRepository<Usuario, Long> {
 	

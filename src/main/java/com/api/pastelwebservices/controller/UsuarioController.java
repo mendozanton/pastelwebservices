@@ -39,20 +39,16 @@ public class UsuarioController {
 	@GetMapping
 	public ResponseEntity<HashMap<String, Object>> getUsuario() {
 		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();
-		InfoObj info = new InfoObj();
 		List<Usuario> usuarios = service.listar();
 		hashMap.put("content", usuarios);
-		hashMap.put("info", info);
 		return new ResponseEntity<>(hashMap, HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<HashMap<String, Object>> getUsuarioId(@PathVariable("id") Long id) {
 		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();
-		InfoObj info = new InfoObj();
 		Usuario usuario = service.buscar(id);
 		hashMap.put("content", usuario);
-		hashMap.put("info", info);
 		return new ResponseEntity<>(hashMap, HttpStatus.OK);
 	}
 	

@@ -47,7 +47,36 @@ public class Pedido {
 	@JsonIgnoreProperties("pedidos")
 	private PedidoPrioridad pedidoPrioridad;
 	
+	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.ALL})
+	@JoinColumn(name = "id_est", foreignKey = @ForeignKey(name = "fk_estado_pedido"))
+	@JsonIgnoreProperties("pedidos")
+	private Estado estado;
+	
 	public Pedido() {
+	}
+
+	public Set<Compra> getCompras() {
+		return compras;
+	}
+
+	public void setCompras(Set<Compra> compras) {
+		this.compras = compras;
+	}
+
+	public PedidoPrioridad getPedidoPrioridad() {
+		return pedidoPrioridad;
+	}
+
+	public void setPedidoPrioridad(PedidoPrioridad pedidoPrioridad) {
+		this.pedidoPrioridad = pedidoPrioridad;
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 	public Long getIdPedido() {

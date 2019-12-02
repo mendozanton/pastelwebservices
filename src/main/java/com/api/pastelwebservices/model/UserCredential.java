@@ -1,7 +1,7 @@
 package com.api.pastelwebservices.model;
 
 public class UserCredential {
-	private Long id;
+	
 	private String email;
 	private String password;
 	
@@ -9,22 +9,10 @@ public class UserCredential {
 	}
 
 	
-	public UserCredential(Long id, String email, String password) {
-		this.id = id;
+	public UserCredential(String email, String password) {
 		this.email = email;
 		this.password = password;
 	}
-
-
-	public Long getId() {
-		return id;
-	}
-
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 
 	public String getEmail() {
 		return email;

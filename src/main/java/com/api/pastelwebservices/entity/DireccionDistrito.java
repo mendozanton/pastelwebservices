@@ -30,6 +30,14 @@ public class DireccionDistrito {
 	public DireccionDistrito() {
 	}
 
+	public Set<Direccion> getDirecciones() {
+		return direcciones;
+	}
+
+	public void setDirecciones(Set<Direccion> direcciones) {
+		this.direcciones = direcciones;
+	}
+
 	public Long getIdDireccionDistrito() {
 		return idDireccionDistrito;
 	}
