@@ -1,8 +1,10 @@
 package com.api.pastelwebservices.util;
 
 import com.api.pastelwebservices.entity.Direccion;
+import com.api.pastelwebservices.entity.Producto;
 import com.api.pastelwebservices.entity.Usuario;
 import com.api.pastelwebservices.model.DireccionModel;
+import com.api.pastelwebservices.model.ProductoModel;
 import com.api.pastelwebservices.model.UserModel;
 
 public class ConversionEntityModel {
@@ -16,11 +18,12 @@ public class ConversionEntityModel {
 		model.setEmail(usuario.getEmail());
 		model.setTelefono(usuario.getTelefono());
 		model.setPassword(usuario.getPassword());
-		model.setSexo(usuario.getSexo().getNombre());
-		model.setDireccion(DireccionToModel(usuario.getDireccion()));
-		model.setRol(usuario.getRol().getNombre());
-		model.setPerfil(usuario.getPerfil().getNombre());
-		model.setEstado(usuario.getEstado().getNombre());
+		model.setSexo(usuario.getSexo()!=null?usuario.getSexo().getNombre():null);
+		model.setDireccion(usuario.getDireccion()!=null?DireccionToModel(usuario.getDireccion()):null);
+		model.setRol(usuario.getRol()!=null?usuario.getRol().getNombre():null);
+		model.setPerfil(usuario.getPerfil()!=null?usuario.getPerfil().getNombre():null);
+		model.setEstado(usuario.getEstado()!=null?usuario.getEstado().getNombre():null);
+		
 		return model;
 	}
 	
@@ -36,7 +39,20 @@ public class ConversionEntityModel {
 		model.setLote(direccion.getLote());
 		model.setCodigoPostal(direccion.getCodigoPostal());
 		model.setReferencia(direccion.getReferencia());
-		model.setDistrito(direccion.getDistrito().getNombre());
+		model.setIdDistrito(direccion.getDistrito().getIdDireccionDistrito());
+		return model;
+	}
+	
+	public static ProductoModel ProductoToModel(Producto producto) {
+		ProductoModel model = new ProductoModel();
+		model.setIdProducto(producto.getIdProducto());
+		model.setNombre(producto.getNombre());
+		model.setDescripcion(producto.getDescripcion());
+		model.setPrecio(producto.getPrecio());
+		model.setStock(producto.getStock());
+		model.setUrlImagen(producto.getUrlImagen());
+		model.setDetalles(producto.getDetalles()!=null?producto.getDetalles().getTipo():null);
+		model.setEstado(producto.getEstado()!=null?producto.getEstado().getNombre():null);
 		return model;
 	}
 }

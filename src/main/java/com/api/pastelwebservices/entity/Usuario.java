@@ -24,20 +24,20 @@ public class Usuario {
 	@Column(name = "id_usu")
 	private Long idUsuario;
 	
-	@Column(name = "nom_usu",length = 20, nullable = false)
-	@NotNull
+	@Column(name = "nom_usu",length = 20)
 	private String nombre;
 	
-	@Column(name = "ape_usu",length = 30, nullable = false)
+	@Column(name = "ape_usu",length = 30)
 	private String apellido;
 	
-	@Column(name = "eda_usu",columnDefinition = "numeric", length = 2)
+	@Column(name = "eda_usu",columnDefinition = "smallint")
 	private Integer edad;
 	
-	@Column(name = "ema_usu",length = 320)
+	@NotNull
+	@Column(name = "ema_usu",length = 320, nullable = false)
 	private String email;
 	
-	@Column(name = "tel_usu",columnDefinition = "numeric", length = 9, nullable = true)
+	@Column(name = "tel_usu",columnDefinition = "int", length = 9, nullable = true)
 	private Integer telefono;
 	
 	@Column(name = "pass_usu",length = 12, nullable = false)

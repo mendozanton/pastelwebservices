@@ -22,9 +22,6 @@ public class Compra {
 	@Column(name = "id_comp")
 	private Long idCompra;
 	
-	@Column(name = "cod_comp", length = 20)
-	private String codigo;
-	
 	@Column(name = "fech_comp")
 	private Date fecha;
 	
@@ -71,13 +68,6 @@ public class Compra {
 		this.idCompra = idCompra;
 	}
 
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
 
 	public Date getFecha() {
 		return fecha;

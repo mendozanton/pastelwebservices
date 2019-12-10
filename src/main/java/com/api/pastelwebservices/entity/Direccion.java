@@ -26,7 +26,7 @@ public class Direccion {
 	@Column(name = "aven_dir", length = 50)
 	private String avenida;
 	
-	@Column(name = "urb_dir", length = 50)
+	@Column(name = "urb_dir", length = 100)
 	private String urbanizacion;
 	
 	@Column(name = "calle_dir", length = 50)
@@ -47,7 +47,7 @@ public class Direccion {
 	@Column(name = "cod_pos_dir", length = 10, nullable = false)
 	private Integer codigoPostal;
 	
-	@Column(name = "ref_dir", length = 100, nullable = false)
+	@Column(name = "ref_dir", length = 200, nullable = false)
 	private String referencia;
 	
 	@OneToMany(mappedBy = "direccion", cascade = {CascadeType.MERGE, CascadeType.ALL})

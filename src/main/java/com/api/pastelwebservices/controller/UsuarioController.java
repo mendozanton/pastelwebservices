@@ -8,7 +8,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.support.DaoSupport;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -20,15 +19,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.pastelwebservices.entity.Direccion;
-import com.api.pastelwebservices.entity.Estado;
-import com.api.pastelwebservices.entity.Rol;
+import com.api.pastelwebservices.entity.Mensaje;
 import com.api.pastelwebservices.entity.Usuario;
-import com.api.pastelwebservices.model.InfoObj;
+import com.api.pastelwebservices.model.DireccionModel;
 import com.api.pastelwebservices.model.UserActualizar;
 import com.api.pastelwebservices.model.UserModel;
 import com.api.pastelwebservices.model.UserRegistrar;
-import com.api.pastelwebservices.service.DireccionService;
+import com.api.pastelwebservices.service.MensajeService;
 import com.api.pastelwebservices.service.UsuarioService;
 import com.api.pastelwebservices.util.ConversionEntityModel;
 
@@ -40,7 +37,7 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService service;
 	@Autowired
-	private DireccionService service2;
+	private MensajeService service_men;
 	
 	@GetMapping
 	public ResponseEntity<HashMap<String, Object>> getUsuarios() {
@@ -64,31 +61,58 @@ public class UsuarioController {
 		return new ResponseEntity<>(hashMap, HttpStatus.OK);
 	}
 	
-	@PostMapping(value = "/crear/cliente")
-	public ResponseEntity<Usuario> saveUsuarioLogin(@Valid @RequestBody UserRegistrar newUsuario) {
-	
-		service.registrarUsuario(newUsuario.getNombre(), newUsuario.getApellido(), newUsuario.getEmail(), newUsuario.getPassword(), null, null, null);
+	@PostMapping
+	public ResponseEntity<HashMap<String, Object>> crearUsuario(@Valid @RequestBody UserRegistrar newUsuario) {
+		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();
 		
+		service.registrarUsuario(newUsuario.getNombre(), newUsuario.getApellido(), newUsuario.getEmail(), newUsuario.getPassword());
+		Mensaje mensaje = service_men.buscar(new Long(3));
+		hashMap.put("content", mensaje);
 		
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>(hashMap,HttpStatus.OK);
 	}
 	
-	@PutMapping(value = "/actualizar/cliente")
-	public ResponseEntity<Usuario> updateUsuarioLogin(@Valid @RequestBody UserActualizar usu_new) {
+	@PostMapping(value = "/{id}/direccion")
+	public ResponseEntity<HashMap<String, Object>> crearDireccion(@PathVariable("id") Long id,@Valid @RequestBody DireccionModel dir) {
+		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();
 		
-		Usuario usu_bd = service.buscar(usu_new.getIdUsuario());
-		usu_bd.setNombre(usu_new.getNombre());
-		usu_bd.setApellido(usu_new.getApellido());
-		usu_bd.setEmail(usu_new.getEmail());
-		usu_bd.setEdad(usu_new.getEdad());
-		usu_bd.setTelefono(usu_bd.getTelefono());
+		service.guardarDireccion(id,dir);
+		service.editarClienteDireccion(id, dir.getIdDireccion());
+		Mensaje mensaje = service_men.buscar(new Long(3));
+		hashMap.put("content", mensaje);
 		
-		Direccion dir= service2.buscar(usu_new.getIdDireccion());
-		usu_bd.setDireccion(dir);
+		return new ResponseEntity<>(hashMap,HttpStatus.OK);
+	}
+	
+	@PutMapping
+	public ResponseEntity<HashMap<String, Object>> actualizarUsuario(@Valid @RequestBody UserActualizar usu) {
+		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();
 		
-		Usuario _usu =service.actualizar(usu_bd);
-		if (_usu == null) return new ResponseEntity<>(_usu,HttpStatus.BAD_REQUEST);
-		return new ResponseEntity<>(_usu,HttpStatus.OK);
+		UserModel usuario = new UserModel(usu.getIdUsuario(), usu.getNombre(), usu.getApellido(), 
+				usu.getEdad(), usu.getTelefono());
+				
+		service.editar(usuario);
+		Mensaje mensaje = service_men.buscar(new Long(4));
+		hashMap.put("content", mensaje);
+
+		return new ResponseEntity<>(hashMap,HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/debug/{id}")
+	public ResponseEntity<HashMap<String, Object>> debugUsuarioId(@PathVariable("id") Long id) {
+		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();
+		Usuario usuario = service.buscar(id);
+		
+		hashMap.put("content", usuario);
+		return new ResponseEntity<>(hashMap, HttpStatus.OK);
+	}
+	@GetMapping(value = "/debug")
+	public ResponseEntity<HashMap<String, Object>> debugClass() {
+		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();
+		UserModel usuario = new UserModel();
+		
+		hashMap.put("content", usuario);
+		return new ResponseEntity<>(hashMap, HttpStatus.OK);
 	}
 	
 }

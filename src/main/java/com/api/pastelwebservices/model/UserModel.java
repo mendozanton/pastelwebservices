@@ -18,6 +18,14 @@ public class UserModel {
 	public UserModel() {
 	}
 
+	public UserModel(Long idUsuario, String nombre, String apellido, Integer edad, Integer telefono) {
+		this.idUsuario = idUsuario;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.edad = edad;
+		this.telefono = telefono;
+	}
+
 	public Long getIdUsuario() {
 		return idUsuario;
 	}

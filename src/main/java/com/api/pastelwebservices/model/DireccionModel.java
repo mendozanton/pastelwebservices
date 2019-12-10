@@ -13,10 +13,16 @@ public class DireccionModel {
 	private String lote;
 	private Integer codigoPostal;
 	private String referencia;
-	private String distrito;
+	private Long IdDistrito;
 	
 	public DireccionModel() {
 	}
+	
+
+	public DireccionModel(Long idDireccion) {
+		this.idDireccion = idDireccion;
+	}
+
 
 	public Long getIdDireccion() {
 		return idDireccion;
@@ -98,13 +104,16 @@ public class DireccionModel {
 		this.referencia = referencia;
 	}
 
-	public String getDistrito() {
-		return distrito;
+
+	public Long getIdDistrito() {
+		return IdDistrito;
 	}
 
-	public void setDistrito(String distrito) {
-		this.distrito = distrito;
+
+	public void setIdDistrito(Long idDistrito) {
+		IdDistrito = idDistrito;
 	}
+
 	
 	
 }

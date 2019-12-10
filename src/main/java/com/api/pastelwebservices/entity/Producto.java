@@ -34,10 +34,14 @@ public class Producto {
 	
 	@Column(name = "stoc_prod")
 	private Integer stock;
-
-	@OneToMany(mappedBy = "producto", cascade = {CascadeType.MERGE, CascadeType.ALL})
+	
+	@Column(name = "urlI_prod")
+	private String urlImagen;
+	
+	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.ALL})
+	@JoinColumn(name = "id_prod_det", foreignKey = @ForeignKey(name = "fk_detalle_producto"))
 	@JsonIgnoreProperties("producto")
-	private Set<ProductoDetalle> detalles;
+	private ProductoDetalle detalles;
 	
 	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.ALL})
 	@JoinColumn(name = "id_est", foreignKey = @ForeignKey(name = "fk_estado_producto"))
@@ -50,6 +54,14 @@ public class Producto {
 	
 	public Producto() {
 		super();
+	}
+
+	public String getUrlImagen() {
+		return urlImagen;
+	}
+
+	public void setUrlImagen(String urlImagen) {
+		this.urlImagen = urlImagen;
 	}
 
 	public Long getIdProducto() {
@@ -100,11 +112,12 @@ public class Producto {
 		this.stock = stock;
 	}
 
-	public Set<ProductoDetalle> getDetalles() {
+
+	public ProductoDetalle getDetalles() {
 		return detalles;
 	}
 
-	public void setDetalles(Set<ProductoDetalle> detalles) {
+	public void setDetalles(ProductoDetalle detalles) {
 		this.detalles = detalles;
 	}
 

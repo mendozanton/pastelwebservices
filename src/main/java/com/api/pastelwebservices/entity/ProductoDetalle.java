@@ -1,5 +1,7 @@
 package com.api.pastelwebservices.entity;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -23,13 +26,9 @@ public class ProductoDetalle {
 	@Column(name = "tip_prod_det", length = 35)
 	private String tipo;
 	
-	@Column(name = "sabo_prod_det", length = 25)
-	private String sabor;
-
-	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.ALL})
-	@JoinColumn(name = "id_prod", foreignKey = @ForeignKey(name = "fk_producto_detalle"))
+	@OneToMany(mappedBy = "detalles", cascade = {CascadeType.MERGE, CascadeType.ALL})
 	@JsonIgnoreProperties("detalles")
-	private Producto producto;
+	private Set<Producto> producto;
 	
 	public ProductoDetalle() {
 		
@@ -51,21 +50,13 @@ public class ProductoDetalle {
 		this.tipo = tipo;
 	}
 
-	public String getSabor() {
-		return sabor;
-	}
-
-	public void setSabor(String sabor) {
-		this.sabor = sabor;
-	}
-
-	public Producto getProducto() {
+	public Set<Producto> getProducto() {
 		return producto;
 	}
 
-	public void setProducto(Producto producto) {
+	public void setProducto(Set<Producto> producto) {
 		this.producto = producto;
 	}
-	
+
 	
 }

@@ -5,9 +5,7 @@ public class UserActualizar {
 	private String nombre;
 	private String apellido;
 	private Integer edad;
-	private String email;
 	private Integer telefono;
-	private Long idDireccion;
 	
 	public UserActualizar() {
 	}
@@ -43,15 +41,7 @@ public class UserActualizar {
 	public void setEdad(Integer edad) {
 		this.edad = edad;
 	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
+	
 	public Integer getTelefono() {
 		return telefono;
 	}
@@ -60,14 +50,6 @@ public class UserActualizar {
 		this.telefono = telefono;
 	}
 
-	public Long getIdDireccion() {
-		return idDireccion;
-	}
-
-	public void setIdDireccion(Long idDireccion) {
-		this.idDireccion = idDireccion;
-	}
-	
 	
 	
 }
