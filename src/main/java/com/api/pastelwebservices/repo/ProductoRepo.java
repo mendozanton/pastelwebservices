@@ -8,4 +8,6 @@ import com.api.pastelwebservices.entity.Producto;
 @Repository
 public interface ProductoRepo extends JpaRepository<Producto, Long>{
 	
+	public Producto findByIdProducto(Long idProducto);
+	
 }

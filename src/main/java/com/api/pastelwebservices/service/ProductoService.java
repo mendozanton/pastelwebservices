@@ -12,19 +12,44 @@ import com.api.pastelwebservices.repo.ProductoRepo;
 import com.api.pastelwebservices.util.ConversionEntityModel;
 
 @Service
-public class ProductoService {
+public class ProductoService implements ServiceCrud<ProductoModel>{
+	
 	@Autowired
 	private ProductoRepo dao;
 	
 	public List<Producto> listarE(){
 		return dao.findAll();
 	}
-	
-	public List<ProductoModel> listarM() {
+
+	@Override
+	public List<ProductoModel> listar() {
 		List<ProductoModel> model = new ArrayList<>();
 		for (Producto p : dao.findAll()) {
 			model.add(ConversionEntityModel.ProductoToModel(p));
 		}
 		return model;
 	}
+
+	@Override
+	public ProductoModel buscar(Long id) {
+		ProductoModel model = null;
+		Producto producto = dao.findByIdProducto(id);
+		
+		if (producto != null) model = ConversionEntityModel.ProductoToModel(producto);
+		return model;
+	}
+
+	@Override
+	public void guardar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actualizar(ProductoModel object) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 }

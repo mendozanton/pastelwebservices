@@ -35,7 +35,8 @@ INSERT INTO pastel.usuario (ape_usu,eda_usu,ema_usu,nom_usu,pass_usu,tel_usu,id_
 
 INSERT INTO pastel.mensaje (men_mens) VALUES 
 ('Fallo validacion'),('Usuario encontrado')
-,('Usuario creado'),('Usuario actualizado');
+,('Usuario creado'),('Usuario actualizado')
+,('Producto no encontrado');
 
 INSERT INTO pastel.error (cam_err,men_err,id_mens) VALUES 
 ('Email','Email de usuario no encontrado',1),
@@ -45,10 +46,20 @@ INSERT INTO pastel.producto_detalle (tip_prod_det) VALUES
 ('Empanada'),('Pan'),('Torta'),('Postre')
 ,('Keke'),('Galleta');
 
-INSERT INTO pastel.producto (nom_prod,prec_prod,stoc_prod,id_prod_det,id_est) VALUES 
-('Carne',3.5,20,1,7),('Mixta',4,10,1,7),
-('Pollo',3.2,21,1,7),('Queso',2.5,5,1,7);
 
+INSERT INTO pastel.producto (des_prod,nom_prod,prec_prod,stoc_prod,id_prod_det,id_est) VALUES 
+('Relleno de carne ','Carne',3.5,20,1,7)
+,('Jamón inglés, quesos fundidos y salsa blanca','Mixta',4,10,1,7)
+,('Pechuga de pollo, espinaca, poro, salsa blanca y mejorana','Pollo',3.2,21,1,7)
+,('Quesos fundidos y salsa blanca','Queso',2.5,5,1,7)
+;
+
+INSERT INTO pastel.imagen (cla_img,nom_img,src_img,id_prod) VALUES 
+(NULL,NULL,'https://i.imgur.com/c7CvSIi.jpg',1)
+,(NULL,NULL,'https://i.imgur.com/qkNbN2O.jpg',2)
+,(NULL,NULL,'https://i.imgur.com/eZsHbht.jpg',3)
+,(NULL,NULL,'https://i.imgur.com/qAGx7Is.jpg',4)
+;
 INSERT INTO pastel.pedido (cod_ped,envi_ped,fec_ped,id_est,id_ped_pri,id_usu) VALUES 
 ('8sgeg89','2019-12-09 15:20:06','2019-12-10 10:00:00',3,3,2)
 ,('2o3gig3','2019-12-08 20:15:00','2019-12-10 22:30:00',3,3,2);

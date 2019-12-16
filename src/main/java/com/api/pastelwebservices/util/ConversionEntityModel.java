@@ -1,9 +1,15 @@
 package com.api.pastelwebservices.util;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import com.api.pastelwebservices.entity.Direccion;
+import com.api.pastelwebservices.entity.Imagen;
 import com.api.pastelwebservices.entity.Producto;
 import com.api.pastelwebservices.entity.Usuario;
 import com.api.pastelwebservices.model.DireccionModel;
+import com.api.pastelwebservices.model.ImagenModel;
 import com.api.pastelwebservices.model.ProductoModel;
 import com.api.pastelwebservices.model.UserModel;
 
@@ -48,9 +54,22 @@ public class ConversionEntityModel {
 		model.setIdProducto(producto.getIdProducto());
 		model.setNombre(producto.getNombre());
 		model.setDescripcion(producto.getDescripcion());
+		model.setDescripcion2(producto.getDescripcion2());
 		model.setPrecio(producto.getPrecio());
 		model.setStock(producto.getStock());
-		model.setUrlImagen(producto.getUrlImagen());
+		 
+		Set<Imagen> entityImg = producto.getImagenes();
+		
+		if(entityImg != null) {
+			List<ImagenModel> imagenes = new ArrayList<>();
+			
+			for (Imagen i : entityImg) {
+				imagenes.add(new ImagenModel(i.getIdImagen(), i.getSource(), i.getNombre(), i.getClasificacion()));
+			}
+			model.setImagenes(imagenes);
+		} else { model.setImagenes(null);}
+		
+				
 		model.setDetalles(producto.getDetalles()!=null?producto.getDetalles().getTipo():null);
 		model.setEstado(producto.getEstado()!=null?producto.getEstado().getNombre():null);
 		return model;

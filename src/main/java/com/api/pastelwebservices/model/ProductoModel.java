@@ -1,26 +1,38 @@
 package com.api.pastelwebservices.model;
 
+import java.util.List;
+
 
 public class ProductoModel {
 	private Long idProducto;
 	private String nombre;
 	private String descripcion;
+	private String descripcion2;
 	private Double precio;
 	private Integer stock;
-	private String urlImagen;
+	private List<ImagenModel> imagenes;
 	private String detalles;
 	private String estado;
-	
 	
 	public ProductoModel() {
 	}
 	
 	
-	public String getUrlImagen() {
-		return urlImagen;
+	public final String getDescripcion2() {
+		return descripcion2;
 	}
-	public void setUrlImagen(String urlImagen) {
-		this.urlImagen = urlImagen;
+
+
+	public final void setDescripcion2(String descripcion2) {
+		this.descripcion2 = descripcion2;
+	}
+
+
+	public final List<ImagenModel> getImagenes() {
+		return imagenes;
+	}
+	public final void setImagenes(List<ImagenModel> imagenes) {
+		this.imagenes = imagenes;
 	}
 	public Long getIdProducto() {
 		return idProducto;

@@ -31,7 +31,7 @@ public class MensajeService {
 		
 		for (Object obj[] : dao.ListarMensajeEspecifico(codigo)) {
 			mensaje.setCodigo(Long.valueOf(obj[0].toString()));
-			mensaje.setMensaje(obj[1].toString());
+			mensaje.setDescripion(obj[1].toString());
 			error.setCodigo(Long.valueOf(obj[2].toString()));
 			error.setCampo(obj[3].toString());
 			error.setMensajeErr(obj[4].toString());

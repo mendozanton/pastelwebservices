@@ -23,11 +23,14 @@ public class Producto {
 	@Column(name = "id_prod")
 	private Long idProducto;
 	
-	@Column(name = "nom_prod", length = 30, nullable = false)
+	@Column(name = "nom_prod", length = 40, nullable = false)
 	private String nombre;
 	
-	@Column(name = "des_prod", length = 120)
+	@Column(name = "des_prod", length = 80)
 	private String descripcion;
+	
+	@Column(name = "des2_prod")
+	private String descripcion2;
 	
 	@Column(name = "prec_prod")
 	private Double precio;
@@ -35,8 +38,9 @@ public class Producto {
 	@Column(name = "stoc_prod")
 	private Integer stock;
 	
-	@Column(name = "urlI_prod")
-	private String urlImagen;
+	@OneToMany(mappedBy = "producto")
+	@JsonIgnoreProperties("producto")
+	private Set<Imagen> imagenes;
 	
 	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.ALL})
 	@JoinColumn(name = "id_prod_det", foreignKey = @ForeignKey(name = "fk_detalle_producto"))
@@ -53,15 +57,7 @@ public class Producto {
 	private Set<Compra> compras;
 	
 	public Producto() {
-		super();
-	}
-
-	public String getUrlImagen() {
-		return urlImagen;
-	}
-
-	public void setUrlImagen(String urlImagen) {
-		this.urlImagen = urlImagen;
+		
 	}
 
 	public Long getIdProducto() {
@@ -88,6 +84,14 @@ public class Producto {
 		this.descripcion = descripcion;
 	}
 
+	public String getDescripcion2() {
+		return descripcion2;
+	}
+
+	public void setDescripcion2(String descripcion2) {
+		this.descripcion2 = descripcion2;
+	}
+
 	public Double getPrecio() {
 		return precio;
 	}
@@ -100,18 +104,17 @@ public class Producto {
 		return stock;
 	}
 
-	public Set<Compra> getCompras() {
-		return compras;
-	}
-
-	public void setCompras(Set<Compra> compras) {
-		this.compras = compras;
-	}
-
 	public void setStock(Integer stock) {
 		this.stock = stock;
 	}
 
+	public Set<Imagen> getImagenes() {
+		return imagenes;
+	}
+
+	public void setImagenes(Set<Imagen> imagenes) {
+		this.imagenes = imagenes;
+	}
 
 	public ProductoDetalle getDetalles() {
 		return detalles;
@@ -128,7 +131,16 @@ public class Producto {
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
-	
+
+	public Set<Compra> getCompras() {
+		return compras;
+	}
+
+	public void setCompras(Set<Compra> compras) {
+		this.compras = compras;
+	}
+
+
 	
 	
 	
