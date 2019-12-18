@@ -14,10 +14,8 @@ public interface UsuarioRepo extends JpaRepository<Usuario, Long> {
 	public Usuario findByEmail(String email);
 	public Usuario findByIdUsuario(Long idUsuario);
 	
-	@Procedure(procedureName = "CrearClienteBasico")
+	@Procedure(procedureName = "registrarCliente")
 	public void registrarUsuarioBasico(
-			@Param("nombre") String nombre,
-			@Param("apellido") String apellido,
 			@Param("email") String email,
 			@Param("passwd") String password);
 	
@@ -25,15 +23,16 @@ public interface UsuarioRepo extends JpaRepository<Usuario, Long> {
 	public void editarUsuario(
 			@Param("nombre") String nombre,
 			@Param("apellido") String apellido,
-			@Param("edad") int edad,
-			@Param("telefono") int telefono,
+			@Param("edad") Integer edad,
+			@Param("telefono") Integer telefono,
+			@Param("id_sex") Long sex,
 			@Param("idusario") Long idusario);
 	
-	@Procedure(procedureName = "CrearDireccion")
+	@Procedure(procedureName = "RegistrarDireccion")
 	public void registrarDireccion(
 			@Param("avenida") String avenida,
 			@Param("calle") String calle,
-			@Param("postal") int postal,
+			@Param("postal") Integer postal,
 			@Param("departamento") String departamento,
 			@Param("lote") String lote,
 			@Param("manzana") String manzana,

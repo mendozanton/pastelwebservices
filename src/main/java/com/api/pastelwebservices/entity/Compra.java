@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -21,6 +22,9 @@ public class Compra {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_comp")
 	private Long idCompra;
+
+	@Column(name = "cod_comp", length = 15)
+	private String codigo;
 	
 	@Column(name = "fech_comp")
 	private Date fecha;
@@ -43,6 +47,24 @@ public class Compra {
 	
 	public Compra() {
 	}
+	
+
+	public Compra(Date fecha, Integer cantidad, Double monto, Producto producto) {
+		this.fecha = fecha;
+		this.cantidad = cantidad;
+		this.monto = monto;
+		this.producto = producto;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
 
 	public Producto getProducto() {
 		return producto;

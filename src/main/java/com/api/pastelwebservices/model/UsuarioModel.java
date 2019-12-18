@@ -1,6 +1,6 @@
 package com.api.pastelwebservices.model;
 
-public class UserModel {
+public class UsuarioModel {
 	
 	private Long idUsuario;
 	private String nombre;
@@ -15,10 +15,10 @@ public class UserModel {
 	private String perfil;
 	private String estado;
 	
-	public UserModel() {
+	public UsuarioModel() {
 	}
 
-	public UserModel(Long idUsuario, String nombre, String apellido, Integer edad, Integer telefono) {
+	public UsuarioModel(Long idUsuario, String nombre, String apellido, Integer edad, Integer telefono) {
 		this.idUsuario = idUsuario;
 		this.nombre = nombre;
 		this.apellido = apellido;

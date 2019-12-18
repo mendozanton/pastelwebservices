@@ -55,6 +55,24 @@ public class Pedido {
 	public Pedido() {
 	}
 
+	
+	public Pedido(Long idPedido) {
+		this.idPedido = idPedido;
+	}
+
+
+
+	public Pedido(Date fecha, Date envio, String codigo, Usuario usuario, PedidoPrioridad pedidoPrioridad,
+			Estado estado) {
+		this.fecha = fecha;
+		this.envio = envio;
+		this.codigo = codigo;
+		this.usuario = usuario;
+		this.pedidoPrioridad = pedidoPrioridad;
+		this.estado = estado;
+	}
+
+
 	public Set<Compra> getCompras() {
 		return compras;
 	}

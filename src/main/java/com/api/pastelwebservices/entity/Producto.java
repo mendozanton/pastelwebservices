@@ -60,6 +60,10 @@ public class Producto {
 		
 	}
 
+	public Producto(Long idProducto) {
+		this.idProducto = idProducto;
+	}
+
 	public Long getIdProducto() {
 		return idProducto;
 	}

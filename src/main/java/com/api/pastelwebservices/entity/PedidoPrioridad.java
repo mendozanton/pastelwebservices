@@ -29,6 +29,12 @@ public class PedidoPrioridad {
 	public PedidoPrioridad() {
 	}
 
+	
+	public PedidoPrioridad(Long idPedidoPrioridad) {
+		this.idPedidoPrioridad = idPedidoPrioridad;
+	}
+
+
 	public Long getIdPedidoPrioridad() {
 		return idPedidoPrioridad;
 	}

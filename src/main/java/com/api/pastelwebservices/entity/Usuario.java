@@ -40,6 +40,7 @@ public class Usuario {
 	@Column(name = "tel_usu",columnDefinition = "int", length = 9, nullable = true)
 	private Integer telefono;
 	
+	@NotNull
 	@Column(name = "pass_usu",length = 12, nullable = false)
 	private String password;
 	
@@ -97,8 +98,26 @@ public class Usuario {
 	}
 
 
+	public Usuario(Long idUsuario, String nombre, String apellido, Integer edad, Integer telefono, UsuarioSexo sexo) {
+		this.idUsuario = idUsuario;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.edad = edad;
+		this.telefono = telefono;
+		this.sexo = sexo;
+	}
+
+	public Usuario(@NotNull String email, @NotNull String password) {
+		this.email = email;
+		this.password = password;
+	}
 
 	public Usuario() {
+	}
+
+	
+	public Usuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 	public Long getIdUsuario() {

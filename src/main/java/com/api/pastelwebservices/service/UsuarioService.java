@@ -5,14 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.api.pastelwebservices.entity.Direccion;
 import com.api.pastelwebservices.entity.Usuario;
 import com.api.pastelwebservices.model.DireccionModel;
-import com.api.pastelwebservices.model.UserModel;
 import com.api.pastelwebservices.repo.UsuarioRepo;
 
 @Service
-public class UsuarioService {
+public class UsuarioService implements ServiceCrud<Usuario>{
 	
 	@Autowired
 	private UsuarioRepo dao;
@@ -43,13 +41,12 @@ public class UsuarioService {
 		return dao.findByIdUsuario(id);
 	}
 
-	public void registrarUsuario(String nombre, String apellido, String email, String password) {
-		dao.registrarUsuarioBasico(nombre, apellido, email, password);
-		// idRol, idPer, idEst
+	public void registrarUsuario(Usuario usuario) {
+		dao.registrarUsuarioBasico(
+				usuario.getEmail(), 
+				usuario.getPassword());
 	}
-	public Usuario guardar(Usuario usuario) {
-		return dao.save(usuario);
-	}
+	
 	
 	public void guardarDireccion(Long iddireccion,DireccionModel direccion) {
 		dao.registrarDireccion(direccion.getAvenida(), direccion.getCalle(), direccion.getCodigoPostal(),
@@ -57,12 +54,30 @@ public class UsuarioService {
 				direccion.getUrbanizacion(), iddireccion, direccion.getIdDistrito());
 	}
 	
-	public void editar(UserModel usuario) {
-		dao.editarUsuario(usuario.getNombre(), usuario.getApellido(), usuario.getEdad(), 
-				usuario.getTelefono(), usuario.getIdUsuario());
+	public void editar(Usuario usuario) {
+		dao.editarUsuario(
+				usuario.getNombre(), 
+				usuario.getApellido(), 
+				usuario.getEdad(), 
+				usuario.getTelefono(), 
+				usuario.getSexo().getIdUsuarioSexo(), 
+				usuario.getIdUsuario()
+				);
 	}
 	
 	public void editarClienteDireccion(Long idusuario, Long iddireccion) {
 		dao.actualizarClienteDireccion(iddireccion, idusuario);
+	}
+
+	@Override
+	public void actualizar(Usuario object) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void guardar(Usuario object) {
+		// TODO Auto-generated method stub
+		
 	}
 }

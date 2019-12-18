@@ -2,21 +2,17 @@ use pastel;
 
 DELIMITER //
  
-create procedure CrearClienteBasico(
-	in nombre varchar(20),
-	in apellido varchar(30),
+create procedure registrarCliente(
 	in email varchar(320),
 	in passwd varchar(12))
 begin
     insert into pastel.usuario(
-    	usuario.nom_usu,
-    	usuario.ape_usu,
     	usuario.ema_usu,
     	usuario.pass_usu,
     	usuario.id_rol,
     	usuario.id_per,
     	usuario.id_est) 
-   	values(nombre,apellido,email,passwd,4,1,1) ;
+   	values(email,passwd,4,1,1) ;
 end //
 
 create procedure ActualizarCliente(
@@ -24,17 +20,19 @@ create procedure ActualizarCliente(
 	in apellido varchar(30),
 	in edad smallint,
 	in telefono int,
+	in sex int,
 	in idusuario bigint)
 begin
     update pastel.usuario set 
     	usuario.nom_usu = nombre,
     	usuario.ape_usu = apellido,
     	usuario.eda_usu = edad,
-    	usuario.tel_usu = telefono
+    	usuario.tel_usu = telefono,
+    	usuario.id_sex  = sex
    	where usuario.id_usu = idusuario ;
 end //
 
-create procedure CrearDireccion(
+create procedure RegistrarDireccion(
 	in avenida varchar(50),
 	in calle varchar(50),
 	in postal int,
@@ -74,6 +72,50 @@ begin
     update pastel.usuario set 
     	usuario.id_dir = iddireccion
    	where usuario.id_usu = idusuario ;
+end //
+
+
+create procedure RegistarCompra(
+	in cantidad int,
+	in codigo varchar(15),
+	in fecha datetime,
+	in monto double,
+	in idProducto bigint)
+begin
+    insert into pastel.compra(
+    	compra.cant_comp,
+    	compra.cod_comp,
+    	compra.fech_comp,
+    	compra.mont_comp,
+    	compra.id_prod) 
+   	values(cantidad,codigo,fecha,monto,idproducto) ;
+end //
+
+create procedure RegistarPedido(
+	in codigo varchar(15),
+	in envio datetime,
+	in fecha datetime,
+	in idEstado bigint,
+	in idPrioridad bigint,
+	in idUsuario bigint)
+begin
+    insert into pastel.pedido(
+    	pedido.cod_ped,
+    	pedido.envi_ped,
+    	pedido.fec_ped,
+    	pedido.id_est,
+    	pedido.id_ped_pri,
+    	pedido.id_usu) 
+   	values(codigo,envio,fecha,idEstado,idPrioridad,idUsuario) ;
+end //
+
+create procedure AsignarPedidoACompra(
+	in idPedido bigint,
+	in idCompra bigint)
+begin
+    update pastel.compra set 
+    	compra.id_ped = idPedido
+   	where compra.id_comp = idCompra ;
 end //
 
 

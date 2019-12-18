@@ -36,7 +36,8 @@ INSERT INTO pastel.usuario (ape_usu,eda_usu,ema_usu,nom_usu,pass_usu,tel_usu,id_
 INSERT INTO pastel.mensaje (men_mens) VALUES 
 ('Fallo validacion'),('Usuario encontrado')
 ,('Usuario creado'),('Usuario actualizado')
-,('Producto no encontrado');
+,('Producto no encontrado'),('Pedido registrado')
+,('Compra registrado');
 
 INSERT INTO pastel.error (cam_err,men_err,id_mens) VALUES 
 ('Email','Email de usuario no encontrado',1),

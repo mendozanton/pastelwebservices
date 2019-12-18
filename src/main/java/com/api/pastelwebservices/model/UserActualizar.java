@@ -6,8 +6,26 @@ public class UserActualizar {
 	private String apellido;
 	private Integer edad;
 	private Integer telefono;
+	private Long sexo;
 	
 	public UserActualizar() {
+	}
+
+	public UserActualizar(Long idUsuario, String nombre, String apellido, Integer edad, Integer telefono, Long sexo) {
+		this.idUsuario = idUsuario;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.edad = edad;
+		this.telefono = telefono;
+		this.sexo = sexo;
+	}
+
+	public Long getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(Long sexo) {
+		this.sexo = sexo;
 	}
 
 	public Long getIdUsuario() {

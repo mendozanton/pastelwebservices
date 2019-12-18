@@ -53,11 +53,11 @@ public class Mensaje {
 		this.codigo = codigo;
 	}
 
-	public final String getDescripion() {
+	public String getDescripion() {
 		return descripion;
 	}
 
-	public final void setDescripion(String descripion) {
+	public void setDescripion(String descripion) {
 		this.descripion = descripion;
 	}
 

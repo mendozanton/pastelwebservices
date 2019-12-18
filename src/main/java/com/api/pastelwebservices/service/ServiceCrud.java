@@ -6,7 +6,7 @@ public interface ServiceCrud<T> {
 	
 	public List<T> listar();
 	public T buscar(Long id);
-	public void guardar();
+	public void guardar(T object);
 	public void actualizar(T object);
 	
 }

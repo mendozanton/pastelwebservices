@@ -4,19 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.api.pastelwebservices.entity.Compra;
 import com.api.pastelwebservices.entity.Direccion;
 import com.api.pastelwebservices.entity.Imagen;
+import com.api.pastelwebservices.entity.Pedido;
 import com.api.pastelwebservices.entity.Producto;
 import com.api.pastelwebservices.entity.Usuario;
+import com.api.pastelwebservices.model.CompraModel;
+import com.api.pastelwebservices.model.CompraModel2;
 import com.api.pastelwebservices.model.DireccionModel;
 import com.api.pastelwebservices.model.ImagenModel;
+import com.api.pastelwebservices.model.PedidoModel;
 import com.api.pastelwebservices.model.ProductoModel;
-import com.api.pastelwebservices.model.UserModel;
+import com.api.pastelwebservices.model.UsuarioModel;
 
 public class ConversionEntityModel {
 	
-	public static UserModel UsuarioToModel(Usuario usuario) {
-		UserModel model = new UserModel();
+	public static UsuarioModel UsuarioToModel(Usuario usuario) {
+		UsuarioModel model = new UsuarioModel();
 		model.setIdUsuario(usuario.getIdUsuario());
 		model.setNombre(usuario.getNombre());
 		model.setApellido(usuario.getApellido());
@@ -29,7 +34,6 @@ public class ConversionEntityModel {
 		model.setRol(usuario.getRol()!=null?usuario.getRol().getNombre():null);
 		model.setPerfil(usuario.getPerfil()!=null?usuario.getPerfil().getNombre():null);
 		model.setEstado(usuario.getEstado()!=null?usuario.getEstado().getNombre():null);
-		
 		return model;
 	}
 	
@@ -59,19 +63,51 @@ public class ConversionEntityModel {
 		model.setStock(producto.getStock());
 		 
 		Set<Imagen> entityImg = producto.getImagenes();
-		
 		if(entityImg != null) {
 			List<ImagenModel> imagenes = new ArrayList<>();
-			
 			for (Imagen i : entityImg) {
 				imagenes.add(new ImagenModel(i.getIdImagen(), i.getSource(), i.getNombre(), i.getClasificacion()));
 			}
 			model.setImagenes(imagenes);
 		} else { model.setImagenes(null);}
 		
-				
 		model.setDetalles(producto.getDetalles()!=null?producto.getDetalles().getTipo():null);
 		model.setEstado(producto.getEstado()!=null?producto.getEstado().getNombre():null);
+		return model;
+	}
+	
+	public static CompraModel CompraToModel(Compra compra) {
+		CompraModel model = new CompraModel();
+		model.setCantidad(compra.getCantidad());
+		model.setFecha(compra.getFecha());
+		model.setIdCompra(compra.getIdCompra());
+		model.setMonto(compra.getMonto());
+		model.setCantidad(compra.getCantidad());
+		model.setPedido(compra.getPedido()!=null?compra.getPedido().getIdPedido():null);
+		model.setProducto(compra.getProducto()!=null?compra.getProducto().getIdProducto():null);
+		return model;
+	}
+	
+	public static PedidoModel PedidoToModel(Pedido pedido) {
+		PedidoModel model = new PedidoModel();
+		model.setIdPedido(pedido.getIdPedido());
+		model.setCodigo(pedido.getCodigo());
+		model.setEnvio(pedido.getEnvio());
+		model.setFecha(pedido.getFecha());
+		model.setEstado(pedido.getEstado()!=null?pedido.getEstado().getNombre():null);
+		model.setPrioridad(pedido.getPedidoPrioridad()!=null?pedido.getPedidoPrioridad().getNombre():null);
+		model.setUsuario(pedido.getUsuario()!=null?pedido.getUsuario().getIdUsuario():null);
+		
+		Set<Compra> entityCompras = pedido.getCompras();
+		if(entityCompras != null) {
+			
+			List<CompraModel2> compras = new ArrayList<>();
+			for (Compra c : entityCompras) {
+				compras.add(new CompraModel2(c.getIdCompra(), c.getCantidad(), c.getMonto(), c.getProducto().getIdProducto()));
+			}
+			model.setCompras(compras);
+		} else { model.setCompras(null);}
+		
 		return model;
 	}
 }

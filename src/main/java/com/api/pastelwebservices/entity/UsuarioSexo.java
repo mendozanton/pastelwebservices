@@ -38,6 +38,10 @@ public class UsuarioSexo {
 	}
 
 
+	public UsuarioSexo(Long idUsuarioSexo) {
+		this.idUsuarioSexo = idUsuarioSexo;
+	}
+
 	public Long getIdUsuarioSexo() {
 		return idUsuarioSexo;
 	}
