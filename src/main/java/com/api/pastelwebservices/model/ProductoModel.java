@@ -18,6 +18,20 @@ public class ProductoModel {
 	}
 	
 	
+	public ProductoModel(Long idProducto, String nombre, String descripcion, String descripcion2, Double precio,
+			Integer stock, List<ImagenModel> imagenes, String detalles, String estado) {
+		this.idProducto = idProducto;
+		this.nombre = nombre;
+		this.descripcion = descripcion;
+		this.descripcion2 = descripcion2;
+		this.precio = precio;
+		this.stock = stock;
+		this.imagenes = imagenes;
+		this.detalles = detalles;
+		this.estado = estado;
+	}
+
+
 	public final String getDescripcion2() {
 		return descripcion2;
 	}

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.pastelwebservices.dto.ProductoCompraDto;
+import com.api.pastelwebservices.dto.ProductoDto;
 import com.api.pastelwebservices.entity.Compra;
 import com.api.pastelwebservices.entity.Mensaje;
 import com.api.pastelwebservices.entity.Producto;
@@ -58,7 +58,7 @@ public class CompraController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<HashMap<String, Object>> registrarCompra(@Valid @RequestBody ProductoCompraDto comp) {
+	public ResponseEntity<HashMap<String, Object>> registrarCompra(@Valid @RequestBody ProductoDto comp) {
 		Double precio = service2.buscar(comp.getIdProducto()).getPrecio();
 		Double monto = precio * comp.getCantidad();
 

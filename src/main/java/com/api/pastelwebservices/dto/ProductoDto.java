@@ -1,13 +1,13 @@
 package com.api.pastelwebservices.dto;
 
-public class ProductoCompraDto {
+public class ProductoDto {
 	private Long idProducto;
 	private Integer cantidad;
 	
-	public ProductoCompraDto() {
+	public ProductoDto() {
 	}
 
-	public ProductoCompraDto(Long idProducto, Integer cantidad) {
+	public ProductoDto(Long idProducto, Integer cantidad) {
 		this.idProducto = idProducto;
 		this.cantidad = cantidad;
 	}

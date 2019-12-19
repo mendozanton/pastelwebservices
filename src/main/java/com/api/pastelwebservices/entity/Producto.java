@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -52,6 +53,10 @@ public class Producto {
 	@JsonIgnoreProperties("productos")
 	private Estado estado;
 	
+	@ManyToMany(mappedBy = "productos",cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("productos")
+	private Set<Cesta> cestas;
+	
 	@OneToMany(mappedBy = "producto")
 	@JsonIgnoreProperties("producto")
 	private Set<Compra> compras;
@@ -70,6 +75,14 @@ public class Producto {
 
 	public void setIdProducto(Long idProducto) {
 		this.idProducto = idProducto;
+	}
+
+	public Set<Cesta> getCestas() {
+		return cestas;
+	}
+
+	public void setCestas(Set<Cesta> cestas) {
+		this.cestas = cestas;
 	}
 
 	public String getNombre() {

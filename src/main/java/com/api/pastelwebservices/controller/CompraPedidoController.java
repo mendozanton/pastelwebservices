@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.api.pastelwebservices.dto.CompraPedidoDto;
-import com.api.pastelwebservices.dto.ProductoCompraDto;
+import com.api.pastelwebservices.dto.CompraDto;
+import com.api.pastelwebservices.dto.ProductoDto;
 import com.api.pastelwebservices.entity.Compra;
 import com.api.pastelwebservices.entity.Estado;
 import com.api.pastelwebservices.entity.Mensaje;
@@ -44,8 +44,8 @@ public class CompraPedidoController {
 	@Autowired private MensajeService service_men;
 	
 	@PostMapping
-	public ResponseEntity<HashMap<String, Object>> registrarCompraPedido(@Valid @RequestBody CompraPedidoDto compra) {
-		List<ProductoCompraDto> Productos = compra.getProducto();
+	public ResponseEntity<HashMap<String, Object>> registrarCompraPedido(@Valid @RequestBody CompraDto compra) {
+		List<ProductoDto> Productos = compra.getProducto();
 		List<String> codigosCompra = new ArrayList<>();
 		
 		for (int i = 0; i < Productos.size(); i++) {

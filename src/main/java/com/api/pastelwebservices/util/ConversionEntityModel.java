@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.api.pastelwebservices.entity.Cesta;
 import com.api.pastelwebservices.entity.Compra;
 import com.api.pastelwebservices.entity.Direccion;
 import com.api.pastelwebservices.entity.Imagen;
 import com.api.pastelwebservices.entity.Pedido;
 import com.api.pastelwebservices.entity.Producto;
 import com.api.pastelwebservices.entity.Usuario;
+import com.api.pastelwebservices.model.CestaModel;
 import com.api.pastelwebservices.model.CompraModel;
 import com.api.pastelwebservices.model.CompraModel2;
 import com.api.pastelwebservices.model.DireccionModel;
@@ -107,6 +109,40 @@ public class ConversionEntityModel {
 			}
 			model.setCompras(compras);
 		} else { model.setCompras(null);}
+		
+		return model;
+	}
+	
+	public static CestaModel CestaToModel(Cesta cesta) {
+		CestaModel model = new CestaModel();
+		//model.setIdCesta(cesta.getIdCesta());
+		model.setFecha(cesta.getFecha());
+		model.setIdUsuario(cesta.getUsuario().getIdUsuario());
+		Set<Producto> entityProductos = cesta.getProductos();
+		if(entityProductos != null) {
+			List<ProductoModel> productos = new ArrayList<>();
+			for (Producto p : entityProductos) {
+				List<ImagenModel> imagenes = new ArrayList<>();
+				
+				for (Imagen i : p.getImagenes()) {
+					imagenes.add(new ImagenModel(i.getIdImagen(), i.getSource(), i.getNombre(), i.getClasificacion()));
+				}
+				
+				
+				productos.add(new ProductoModel(
+						p.getIdProducto(), 
+						p.getNombre(), 
+						p.getDescripcion(), 
+						p.getDescripcion2(),
+						p.getPrecio(), 
+						p.getStock(),
+						imagenes, 
+						p.getDetalles()!=null?p.getDetalles().getTipo():null,
+						p.getEstado()!=null?p.getEstado().getNombre():null));
+			}
+			model.setProductos(productos);
+		} else { model.setProductos(null);}
+		
 		
 		return model;
 	}

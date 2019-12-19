@@ -77,6 +77,9 @@ public class Usuario {
 	@JsonIgnoreProperties("usuario")
 	private Set<Preferencia> preferencias;
 	
+	@OneToMany(mappedBy = "usuario")
+	@JsonIgnoreProperties("usuario")
+	private Set<Cesta> cestas;
 	
 	public Usuario(String nombre, String apellido, String email, String password) {
 		this.nombre = nombre;
@@ -116,6 +119,14 @@ public class Usuario {
 	}
 
 	
+	public Set<Cesta> getCesta() {
+		return cestas;
+	}
+
+	public void setCesta(Set<Cesta> cesta) {
+		cestas = cesta;
+	}
+
 	public Usuario(Long idUsuario) {
 		this.idUsuario = idUsuario;
 	}

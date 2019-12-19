@@ -1,6 +1,7 @@
 package com.api.pastelwebservices.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.api.pastelwebservices.entity.Cesta;
 import com.api.pastelwebservices.entity.Mensaje;
 import com.api.pastelwebservices.entity.Usuario;
 import com.api.pastelwebservices.entity.UsuarioSexo;
@@ -26,9 +28,11 @@ import com.api.pastelwebservices.model.DireccionModel;
 import com.api.pastelwebservices.model.UserActualizar;
 import com.api.pastelwebservices.model.UsuarioModel;
 import com.api.pastelwebservices.model.UserRegistrar;
+import com.api.pastelwebservices.service.CestaService;
 import com.api.pastelwebservices.service.MensajeService;
 import com.api.pastelwebservices.service.UsuarioService;
 import com.api.pastelwebservices.util.ConversionEntityModel;
+import com.api.pastelwebservices.util.JsonResponseMap;
 import com.api.pastelwebservices.util.MensajeCodigo;
 
 @RestController
@@ -38,57 +42,52 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService service;
 	@Autowired
+	private CestaService service2;
+	@Autowired
 	private MensajeService service_men;
 	
 	@GetMapping
 	public ResponseEntity<HashMap<String, Object>> getUsuarios() {
-		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();
 		List<UsuarioModel> usuariosModel = new ArrayList<UsuarioModel>();
-		
 		for (Usuario usuario : service.listar()) {
 			usuariosModel.add(ConversionEntityModel.UsuarioToModel(usuario));
 		}
-		
-		hashMap.put("content", usuariosModel);
-		return new ResponseEntity<>(hashMap, HttpStatus.OK);
+		return new ResponseEntity<>(JsonResponseMap.getHashMap(usuariosModel), HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<HashMap<String, Object>> getUsuarioId(@PathVariable("id") Long id) {
-		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();
 		Usuario usuario = service.buscar(id);
 		UsuarioModel usuariosModel = ConversionEntityModel.UsuarioToModel(usuario);
-		hashMap.put("content", usuariosModel);
-		return new ResponseEntity<>(hashMap, HttpStatus.OK);
+		return new ResponseEntity<>(JsonResponseMap.getHashMap(usuariosModel), HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<HashMap<String, Object>> crearUsuario(@Valid @RequestBody UserRegistrar newUsuario) {
-		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();
-		
-		service.registrarUsuario(new Usuario(newUsuario.getEmail(), newUsuario.getPassword()));
-		Mensaje mensaje = service_men.buscar(MensajeCodigo.user_created);
-		hashMap.put("content", mensaje);
-		
-		return new ResponseEntity<>(hashMap,HttpStatus.OK);
+	public ResponseEntity<HashMap<String, Object>> crearUsuario(@Valid @RequestBody UserRegistrar usuario) {
+		Mensaje mensaje;
+		if (service.buscar(usuario.getEmail()) == null) {
+			service.registrarUsuario(new Usuario(usuario.getEmail(), usuario.getPassword()));
+			Long idUsuario = service.buscar(usuario.getEmail(), usuario.getPassword()).getIdUsuario();
+			service2.guardar(new Cesta(new Date(),new Usuario(idUsuario)));
+			
+			mensaje = service_men.buscar(MensajeCodigo.user_created);
+		} else {
+			mensaje = service_men.buscar(MensajeCodigo.correo_ya_existe);
+		}
+		return new ResponseEntity<>(JsonResponseMap.getHashMap(mensaje),HttpStatus.OK);
 	}
 	
 	@PostMapping(value = "/{id}/direccion")
 	public ResponseEntity<HashMap<String, Object>> crearDireccion(@PathVariable("id") Long id,@Valid @RequestBody DireccionModel dir) {
-		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();
-		
 		service.guardarDireccion(id,dir);
 		service.editarClienteDireccion(id, dir.getIdDireccion());
 		Mensaje mensaje = service_men.buscar(new Long(3));
-		hashMap.put("content", mensaje);
-		
-		return new ResponseEntity<>(hashMap,HttpStatus.OK);
+	
+		return new ResponseEntity<>(JsonResponseMap.getHashMap(mensaje),HttpStatus.OK);
 	}
 	
 	@PutMapping
 	public ResponseEntity<HashMap<String, Object>> actualizarUsuario(@Valid @RequestBody UserActualizar usu) {
-		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();
-		
 		Usuario usuario = new Usuario(
 				usu.getIdUsuario(),
 				usu.getNombre(), 
@@ -99,9 +98,8 @@ public class UsuarioController {
 				
 		service.editar(usuario);
 		Mensaje mensaje = service_men.buscar(new Long(4));
-		hashMap.put("content", mensaje);
 
-		return new ResponseEntity<>(hashMap,HttpStatus.OK);
+		return new ResponseEntity<>(JsonResponseMap.getHashMap(mensaje),HttpStatus.OK);
 	}
 	
 	

@@ -118,6 +118,16 @@ begin
    	where compra.id_comp = idCompra ;
 end //
 
+create procedure RegistrarCesta(
+	in fecha datetime,
+	in idUsuario bigint)
+begin
+    insert into pastel.cesta(
+    	cesta.fech_cest,
+    	cesta.id_usu) 
+   	values(fecha,idUsuario) ;
+end //
+
 
 
 

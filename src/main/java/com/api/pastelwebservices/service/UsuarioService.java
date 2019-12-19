@@ -36,7 +36,9 @@ public class UsuarioService implements ServiceCrud<Usuario>{
 		
 		return null;
 	}
-	
+	public Usuario buscar(String email) {
+		return dao.findByEmail(email);
+	}
 	public Usuario buscar(Long id) {
 		return dao.findByIdUsuario(id);
 	}

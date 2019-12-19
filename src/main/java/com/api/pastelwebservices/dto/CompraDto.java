@@ -5,29 +5,29 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class CompraPedidoDto {
+public class CompraDto {
 	
-	private List<ProductoCompraDto> producto;
+	private List<ProductoDto> producto;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss",timezone ="America/Bogota")
 	private Date envio;
 	private Long prioridad;
 	private Long usuario;
 	
-	public CompraPedidoDto() {
+	public CompraDto() {
 	}
 
-	public CompraPedidoDto(List<ProductoCompraDto> producto, Date envio, Long prioridad, Long usuario) {
+	public CompraDto(List<ProductoDto> producto, Date envio, Long prioridad, Long usuario) {
 		this.producto = producto;
 		this.envio = envio;
 		this.prioridad = prioridad;
 		this.usuario = usuario;
 	}
 
-	public List<ProductoCompraDto> getProducto() {
+	public List<ProductoDto> getProducto() {
 		return producto;
 	}
 
-	public void setProducto(List<ProductoCompraDto> producto) {
+	public void setProducto(List<ProductoDto> producto) {
 		this.producto = producto;
 	}
 
