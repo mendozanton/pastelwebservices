@@ -53,9 +53,9 @@ public class Producto {
 	@JsonIgnoreProperties("productos")
 	private Estado estado;
 	
-	@ManyToMany(mappedBy = "productos",cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("productos")
-	private Set<Cesta> cestas;
+	@OneToMany(mappedBy = "producto")
+	@JsonIgnoreProperties("producto")
+	private Set<CestaProductos> cestaProductos;
 	
 	@OneToMany(mappedBy = "producto")
 	@JsonIgnoreProperties("producto")
@@ -77,12 +77,13 @@ public class Producto {
 		this.idProducto = idProducto;
 	}
 
-	public Set<Cesta> getCestas() {
-		return cestas;
+
+	public Set<CestaProductos> getCestaProductos() {
+		return cestaProductos;
 	}
 
-	public void setCestas(Set<Cesta> cestas) {
-		this.cestas = cestas;
+	public void setCestaProductos(Set<CestaProductos> cestaProductos) {
+		this.cestaProductos = cestaProductos;
 	}
 
 	public String getNombre() {

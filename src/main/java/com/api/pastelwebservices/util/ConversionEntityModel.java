@@ -1,17 +1,20 @@
 package com.api.pastelwebservices.util;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import com.api.pastelwebservices.dto.CestaDto2;
+import com.api.pastelwebservices.dto.ProductoDto2;
 import com.api.pastelwebservices.entity.Cesta;
+import com.api.pastelwebservices.entity.CestaProductos;
 import com.api.pastelwebservices.entity.Compra;
 import com.api.pastelwebservices.entity.Direccion;
 import com.api.pastelwebservices.entity.Imagen;
 import com.api.pastelwebservices.entity.Pedido;
 import com.api.pastelwebservices.entity.Producto;
 import com.api.pastelwebservices.entity.Usuario;
-import com.api.pastelwebservices.model.CestaModel;
 import com.api.pastelwebservices.model.CompraModel;
 import com.api.pastelwebservices.model.CompraModel2;
 import com.api.pastelwebservices.model.DireccionModel;
@@ -112,38 +115,43 @@ public class ConversionEntityModel {
 		
 		return model;
 	}
+	public static CestaDto2 CestaToModel(Cesta cesta) {
+		CestaDto2 model = new CestaDto2();
+		//model.setIdCesta(cesta);
+		return model;
+	}
+	public static CestaDto2 CestaToModel2(List<CestaProductos> cesta) {
+		CestaDto2 model = new CestaDto2();
+		model.setIdCesta(cesta.get(0).getCesta().getIdCesta());
+		model.setFecha(cesta.get(0).getCesta().getFecha());
+		model.setIdUsuario(cesta.get(0).getCesta().getUsuario().getIdUsuario());
 	
-	public static CestaModel CestaToModel(Cesta cesta) {
-		CestaModel model = new CestaModel();
-		//model.setIdCesta(cesta.getIdCesta());
-		model.setFecha(cesta.getFecha());
-		model.setIdUsuario(cesta.getUsuario().getIdUsuario());
-		Set<Producto> entityProductos = cesta.getProductos();
-		if(entityProductos != null) {
-			List<ProductoModel> productos = new ArrayList<>();
-			for (Producto p : entityProductos) {
-				List<ImagenModel> imagenes = new ArrayList<>();
-				
-				for (Imagen i : p.getImagenes()) {
-					imagenes.add(new ImagenModel(i.getIdImagen(), i.getSource(), i.getNombre(), i.getClasificacion()));
-				}
-				
-				
-				productos.add(new ProductoModel(
-						p.getIdProducto(), 
-						p.getNombre(), 
-						p.getDescripcion(), 
-						p.getDescripcion2(),
-						p.getPrecio(), 
-						p.getStock(),
-						imagenes, 
-						p.getDetalles()!=null?p.getDetalles().getTipo():null,
-						p.getEstado()!=null?p.getEstado().getNombre():null));
+		List<ProductoDto2> productos = new ArrayList<>();
+	    for (CestaProductos cp : cesta) {
+	    	Producto p = cp.getProducto();
+	    	
+	    	List<ImagenModel> imagenes = new ArrayList<>();
+	    	for (Imagen im : p.getImagenes()) {
+				imagenes.add(new ImagenModel(
+						im.getIdImagen(), 
+						im.getSource(), 
+						im.getNombre(), 
+						im.getClasificacion()));
 			}
-			model.setProductos(productos);
-		} else { model.setProductos(null);}
-		
-		
+	    	productos.add(new ProductoDto2(
+	    			p.getIdProducto(), 
+	    			p.getNombre(), 
+	    			p.getDescripcion(), 
+	    			p.getDescripcion2(), 
+	    			cp.getCantidad(), 
+	    			p.getPrecio(), 
+	    			p.getStock(), 
+	    			imagenes, 
+	    			p.getDetalles().getTipo(), 
+	    			cp.getEstado().getIdEstado()));
+		}
+	    model.setProductos(productos);
+
 		return model;
 	}
 }

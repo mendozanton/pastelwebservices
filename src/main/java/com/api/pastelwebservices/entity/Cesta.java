@@ -28,10 +28,9 @@ public class Cesta {
 	@Column(name = "fech_cest")
 	private Date fecha;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_Prod", foreignKey = @ForeignKey(name = "fk_producto_cesta"))
-	@JsonIgnoreProperties("productos")
-	private Set<Producto> productos;
+	@OneToMany(mappedBy = "cesta")
+	@JsonIgnore
+	private Set<CestaProductos> cestaProductos;
 	
 	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.ALL})
 	@JoinColumn(name = "id_usu", foreignKey = @ForeignKey(name = "fk_usuario_cesta"))
@@ -42,18 +41,16 @@ public class Cesta {
 	}
 
 	
+	public Cesta(Long idCesta) {
+		this.idCesta = idCesta;
+	}
+
+
 	public Cesta(Date fecha, Usuario usuario) {
 		this.fecha = fecha;
 		this.usuario = usuario;
 	}
 
-
-	public Cesta(Long idCesta, Date fecha, Set<Producto> productos, Usuario usuario) {
-		this.idCesta = idCesta;
-		this.fecha = fecha;
-		this.productos = productos;
-		this.usuario = usuario;
-	}
 
 	public Long getIdCesta() {
 		return idCesta;
@@ -71,13 +68,16 @@ public class Cesta {
 		this.fecha = fecha;
 	}
 
-	public Set<Producto> getProductos() {
-		return productos;
+
+	public Set<CestaProductos> getCestaProductos() {
+		return cestaProductos;
 	}
 
-	public void setProductos(Set<Producto> productos) {
-		this.productos = productos;
+
+	public void setCestaProductos(Set<CestaProductos> cestaProductos) {
+		this.cestaProductos = cestaProductos;
 	}
+
 
 	public Usuario getUsuario() {
 		return usuario;

@@ -37,7 +37,11 @@ public class Estado {
 	@OneToMany(mappedBy = "estado",cascade = {CascadeType.MERGE, CascadeType.ALL})
 	@JsonIgnoreProperties("estado")
 	private Set<Pedido> pedidos;
-
+	
+	@OneToMany(mappedBy = "estado")
+	@JsonIgnoreProperties("estado")
+	private Set<CestaProductos> cestaProductos;
+	
 	public Estado() {
 	}
 
@@ -47,6 +51,14 @@ public class Estado {
 
 	public Long getIdEstado() {
 		return idEstado;
+	}
+
+	public Set<CestaProductos> getCestaProductos() {
+		return cestaProductos;
+	}
+
+	public void setCestaProductos(Set<CestaProductos> cestaProductos) {
+		this.cestaProductos = cestaProductos;
 	}
 
 	public Set<Usuario> getUsuarios() {
