@@ -32,7 +32,13 @@ public class CestaProdService implements ServiceCrud<CestaProductos> {
 
 	@Override
 	public void guardar(CestaProductos object) {
-		// TODO Auto-generated method stub
+		
+		dao.registrarCestaProd(
+				object.getCantidad(), 
+				object.getCesta().getIdCesta(), 
+				object.getProducto().getIdProducto(),
+				object.getEstado().getIdEstado()
+		);
 		
 	}
 

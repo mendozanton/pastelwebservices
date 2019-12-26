@@ -31,6 +31,12 @@ public class ProductoDetalle {
 		
 	}
 
+	
+	public ProductoDetalle(Long idProductoDetalle) {
+		this.idProductoDetalle = idProductoDetalle;
+	}
+
+
 	public Long getIdProductoDetalle() {
 		return idProductoDetalle;
 	}

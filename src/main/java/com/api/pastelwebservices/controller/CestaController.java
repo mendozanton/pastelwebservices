@@ -18,8 +18,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.api.pastelwebservices.dto.CestaDto;
+import com.api.pastelwebservices.dto.CestaDto2;
+import com.api.pastelwebservices.dto.ProductoDto;
+import com.api.pastelwebservices.dto.ProductoDto2;
+import com.api.pastelwebservices.dto.ProductoDto3;
 import com.api.pastelwebservices.entity.Cesta;
+import com.api.pastelwebservices.entity.CestaProductos;
+import com.api.pastelwebservices.entity.Estado;
 import com.api.pastelwebservices.entity.Mensaje;
+import com.api.pastelwebservices.entity.Producto;
+import com.api.pastelwebservices.entity.ProductoDetalle;
 import com.api.pastelwebservices.service.CestaProdService;
 import com.api.pastelwebservices.service.CestaService;
 import com.api.pastelwebservices.service.MensajeService;
@@ -40,24 +48,32 @@ public class CestaController {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<HashMap<String, Object>> getCestaIdCesta(@PathVariable("id") Long id) {
 	
-		
-		return new ResponseEntity<>(JsonResponseMap.getHashMap(
-				ConversionEntityModel.CestaToModel2(service.buscarIdCesta(id))),HttpStatus.OK);
+		CestaDto2 response = ConversionEntityModel.CestaToModel2(service.buscarIdCesta(id));
+		return new ResponseEntity<>(JsonResponseMap.getHashMap(response),HttpStatus.OK);
 	}
 	
 	
 	@GetMapping(value = "/usuario={id}")
 	public ResponseEntity<HashMap<String, Object>> getCestaIdUSuario(@PathVariable("id") Long id) {
-	
 		
-		return new ResponseEntity<>(JsonResponseMap.getHashMap(
-				ConversionEntityModel.CestaToModel2(
-						service.buscarIdCesta(
-								service2.buscarPorUsuario(id).getIdCesta()))),HttpStatus.OK);
+		CestaDto2 response= ConversionEntityModel.CestaToModel2(service.buscarIdCesta(
+				service2.buscarPorUsuario(id).getIdCesta()));
+		
+		return new ResponseEntity<>(JsonResponseMap.getHashMap(response),HttpStatus.OK);
 	}
-	/*
+	
 	@PutMapping
 	public ResponseEntity<HashMap<String, Object>> actualizarCesta(@Valid @RequestBody CestaDto cesta){
+		CestaProductos cp = new CestaProductos();
+		cp.setCesta(service2.buscarPorUsuario(cesta.getIdUsuario()));
 		
-	}*/
+		Producto p = new Producto(cesta.getProducto().getIdProducto());
+		cp.setProducto(p);
+		cp.setCantidad(cesta.getProducto().getCantidad());
+		cp.setEstado(new Estado(cesta.getProducto().getIdEstado()));
+		service.guardar(cp);
+		
+		Mensaje mensaje = service_men.buscar(MensajeCodigo.prod_add_cesta);
+		return new ResponseEntity<>(JsonResponseMap.getHashMap(mensaje),HttpStatus.OK);
+	}
 }

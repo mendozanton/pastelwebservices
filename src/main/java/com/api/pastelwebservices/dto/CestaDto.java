@@ -4,24 +4,25 @@ import java.util.List;
 import com.api.pastelwebservices.model.ProductoModel;
 
 public class CestaDto {
-	private List<ProductoModel> productos;
 	private Long idUsuario;
+	private ProductoDto3 producto;
+	
 	
 	
 	public CestaDto() {
 	}
 
-	public CestaDto(List<ProductoModel> productos, Long idUsuario) {
-		this.productos = productos;
+	public CestaDto(ProductoDto3 producto, Long idUsuario) {
+		this.producto = producto;
 		this.idUsuario = idUsuario;
 	}
 
-	public List<ProductoModel> getProductos() {
-		return productos;
+	public ProductoDto3 getProducto() {
+		return producto;
 	}
 
-	public void setProductos(List<ProductoModel> productos) {
-		this.productos = productos;
+	public void setProductos(ProductoDto3 producto) {
+		this.producto = producto;
 	}
 
 	public Long getIdUsuario() {

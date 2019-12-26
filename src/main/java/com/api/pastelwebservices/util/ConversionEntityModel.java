@@ -147,7 +147,7 @@ public class ConversionEntityModel {
 	    			p.getPrecio(), 
 	    			p.getStock(), 
 	    			imagenes, 
-	    			p.getDetalles().getTipo(), 
+	    			p.getDetalles().getIdProductoDetalle(), 
 	    			cp.getEstado().getIdEstado()));
 		}
 	    model.setProductos(productos);

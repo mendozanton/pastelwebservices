@@ -2,6 +2,7 @@ package com.api.pastelwebservices.dto;
 
 import java.util.List;
 
+import com.api.pastelwebservices.entity.ProductoDetalle;
 import com.api.pastelwebservices.model.ImagenModel;
 
 public class ProductoDto2 {
@@ -13,15 +14,12 @@ public class ProductoDto2 {
 	private Double precio;
 	private Integer stock;
 	private List<ImagenModel> imagenes;
-	private String detalles;
+	private Long idDetalle;
 	private Long idEstado;
 	
 	
-	public ProductoDto2() {
-	}
-	
 	public ProductoDto2(Long idProducto, String nombre, String descripcion, String descripcion2, Integer cantidad,
-			Double precio, Integer stock, List<ImagenModel> imagenes, String detalles, Long idEstado) {
+			Double precio, Integer stock, List<ImagenModel> imagenes, Long idDetalle, Long idEstado) {
 		this.idProducto = idProducto;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -30,10 +28,25 @@ public class ProductoDto2 {
 		this.precio = precio;
 		this.stock = stock;
 		this.imagenes = imagenes;
-		this.detalles = detalles;
+		this.idDetalle = idDetalle;
 		this.idEstado = idEstado;
 	}
 
+
+	public Long getIdDetalle() {
+		return idDetalle;
+	}
+
+
+	public void setIdDetalle(Long idDetalle) {
+		this.idDetalle = idDetalle;
+	}
+
+
+	public ProductoDto2() {
+	}
+	
+	
 	public Long getIdProducto() {
 		return idProducto;
 	}
@@ -82,12 +95,7 @@ public class ProductoDto2 {
 	public void setImagenes(List<ImagenModel> imagenes) {
 		this.imagenes = imagenes;
 	}
-	public String getDetalles() {
-		return detalles;
-	}
-	public void setDetalles(String detalles) {
-		this.detalles = detalles;
-	}
+
 	public Long getIdEstado() {
 		return idEstado;
 	}

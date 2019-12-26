@@ -128,6 +128,20 @@ begin
    	values(fecha,idUsuario) ;
 end //
 
+create procedure RegistrarCestaProd(
+	in cantidad int,
+	in idCesta bigint,
+	in idProducto bigint,
+	in idEstado bigint)
+begin
+    insert into pastel.cesta_productos(
+    	cesta_productos.cant_cest_prod,
+    	cesta_productos.id_cest,
+    	cesta_productos.id_prod,
+    	cesta_productos.id_est)
+   	values(cantidad,idCesta,idProducto,idEstado) ;
+end //
+
 
 
 
