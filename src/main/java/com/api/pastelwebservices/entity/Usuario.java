@@ -1,5 +1,6 @@
 package com.api.pastelwebservices.entity;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -24,14 +25,14 @@ public class Usuario {
 	@Column(name = "id_usu")
 	private Long idUsuario;
 	
-	@Column(name = "nom_usu",length = 20)
+	@Column(name = "nom_usu",length = 30)
 	private String nombre;
 	
 	@Column(name = "ape_usu",length = 30)
 	private String apellido;
 	
-	@Column(name = "eda_usu",columnDefinition = "smallint")
-	private Integer edad;
+	@Column(name = "nac_usu")
+	private Date nacimiento;
 	
 	@NotNull
 	@Column(name = "ema_usu",length = 320, nullable = false)
@@ -41,7 +42,7 @@ public class Usuario {
 	private Integer telefono;
 	
 	@NotNull
-	@Column(name = "pass_usu",length = 12, nullable = false)
+	@Column(name = "pass_usu",length = 18, nullable = false)
 	private String password;
 	
 	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.ALL})
@@ -81,6 +82,17 @@ public class Usuario {
 	@JsonIgnoreProperties("usuario")
 	private Set<Cesta> cestas;
 	
+	
+	
+	public Usuario() {
+	}
+
+
+	public Usuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+
 	public Usuario(String nombre, String apellido, String email, String password) {
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -88,48 +100,27 @@ public class Usuario {
 		this.password = password;
 	}
 
-	public Usuario(Long idUsuario, String nombre, String apellido, Integer edad, String email, Integer telefono,
-			String password, Direccion direccion) {
-		this.idUsuario = idUsuario;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.edad = edad;
-		this.email = email;
-		this.telefono = telefono;
-		this.password = password;
-		this.direccion = direccion;
-	}
-
-
-	public Usuario(Long idUsuario, String nombre, String apellido, Integer edad, Integer telefono, UsuarioSexo sexo) {
-		this.idUsuario = idUsuario;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.edad = edad;
-		this.telefono = telefono;
-		this.sexo = sexo;
-	}
-
-	public Usuario(@NotNull String email, @NotNull String password) {
-		this.email = email;
-		this.password = password;
-	}
-
-	public Usuario() {
-	}
-
 	
-	public Set<Cesta> getCesta() {
-		return cestas;
-	}
-
-	public void setCesta(Set<Cesta> cesta) {
-		cestas = cesta;
-	}
-
-	public Usuario(Long idUsuario) {
+	public Usuario(Long idUsuario, String nombre, String apellido, Date nacimiento, @NotNull String email,
+			Integer telefono, @NotNull String password, UsuarioSexo sexo, Direccion direccion, Rol rol, Perfil perfil,
+			Estado estado, Set<Pedido> pedidos, Set<Preferencia> preferencias, Set<Cesta> cestas) {
 		this.idUsuario = idUsuario;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.nacimiento = nacimiento;
+		this.email = email;
+		this.telefono = telefono;
+		this.password = password;
+		this.sexo = sexo;
+		this.direccion = direccion;
+		this.rol = rol;
+		this.perfil = perfil;
+		this.estado = estado;
+		this.pedidos = pedidos;
+		this.preferencias = preferencias;
+		this.cestas = cestas;
 	}
+
 
 	public Long getIdUsuario() {
 		return idUsuario;
@@ -155,12 +146,12 @@ public class Usuario {
 		this.apellido = apellido;
 	}
 
-	public Integer getEdad() {
-		return edad;
+	public Date getNacimiento() {
+		return nacimiento;
 	}
 
-	public void setEdad(Integer edad) {
-		this.edad = edad;
+	public void setNacimiento(Date nacimiento) {
+		this.nacimiento = nacimiento;
 	}
 
 	public String getEmail() {
@@ -243,6 +234,13 @@ public class Usuario {
 		this.preferencias = preferencias;
 	}
 
+	public Set<Cesta> getCestas() {
+		return cestas;
+	}
+
+	public void setCestas(Set<Cesta> cestas) {
+		this.cestas = cestas;
+	}
 
 	
 	

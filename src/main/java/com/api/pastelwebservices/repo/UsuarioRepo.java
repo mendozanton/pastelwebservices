@@ -1,5 +1,7 @@
 package com.api.pastelwebservices.repo;
 
+import java.util.Date;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
@@ -16,27 +18,19 @@ public interface UsuarioRepo extends JpaRepository<Usuario, Long> {
 	
 	@Procedure(procedureName = "registrarCliente")
 	public void registrarUsuarioBasico(
-			@Param("email") String email,
-			@Param("passwd") String password);
-	
-	@Procedure(procedureName = "ActualizarCliente")
-	public void editarUsuario(
 			@Param("nombre") String nombre,
 			@Param("apellido") String apellido,
-			@Param("edad") Integer edad,
+			@Param("nacimiento") Date nacimiento,
 			@Param("telefono") Integer telefono,
-			@Param("id_sex") Long sex,
-			@Param("idusario") Long idusario);
+			@Param("idsexo") Long idsexo,
+			@Param("email") String email,
+			@Param("passwd") String password);
 	
 	@Procedure(procedureName = "RegistrarDireccion")
 	public void registrarDireccion(
 			@Param("avenida") String avenida,
 			@Param("calle") String calle,
-			@Param("postal") Integer postal,
-			@Param("departamento") String departamento,
-			@Param("lote") String lote,
-			@Param("manzana") String manzana,
-			@Param("sector") String sector,
+			@Param("referencia") String referencia,
 			@Param("urbanizacion") String urbanizacion,
 			@Param("iddireccion") Long iddireccion,
 			@Param("iddistrito") Long iddistrito);
@@ -44,5 +38,20 @@ public interface UsuarioRepo extends JpaRepository<Usuario, Long> {
 	@Procedure(procedureName = "ActualizarClienteDireccion")
 	public void actualizarClienteDireccion(
 			@Param("iddireccion") Long iddireccion,
+			@Param("idusuario") Long idusuario);
+	
+	@Procedure(procedureName = "ActualizarEmailCliente")
+	public void actualizarEmailCliente(
+			@Param("email") String email,
+			@Param("idusuario") Long idusuario);
+	
+	@Procedure(procedureName = "ActualizarTelefCliente")
+	public void actualizarTelefCliente(
+			@Param("telefono") Integer telefono,
+			@Param("idusuario") Long idusuario);
+	
+	@Procedure(procedureName = "ActualizarPasswCliente")
+	public void actualizarPasswCliente(
+			@Param("passwd") String passwd,
 			@Param("idusuario") Long idusuario);
 }

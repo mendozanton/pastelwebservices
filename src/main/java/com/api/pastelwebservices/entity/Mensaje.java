@@ -24,7 +24,7 @@ public class Mensaje {
 	
 	@Column(name = "men_mens", nullable = false)
 	@NotNull
-	private String descripion;
+	private String descripcion;
 
 	@Column(name = "err_mens")
 	@OneToMany(mappedBy = "mensaje", cascade = {CascadeType.MERGE, CascadeType.ALL})
@@ -53,12 +53,12 @@ public class Mensaje {
 		this.codigo = codigo;
 	}
 
-	public String getDescripion() {
-		return descripion;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setDescripion(String descripion) {
-		this.descripion = descripion;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	public List<Error> getErrores() {

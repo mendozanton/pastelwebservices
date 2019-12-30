@@ -11,4 +11,8 @@ public class MensajeCodigo {
 	public static final Long compra_created = new Long(7);
 	public static final Long correo_ya_existe = new Long(8);
 	public static final Long prod_add_cesta = new Long(9);
+	public static final Long user_updated_email = new Long(10);
+	public static final Long user_updated_telef = new Long(11);
+	public static final Long user_updated_passw = new Long(12);
+	public static final Long user_passw_no_valid = new Long(13);
 }

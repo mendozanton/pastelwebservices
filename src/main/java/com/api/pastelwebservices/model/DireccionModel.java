@@ -3,34 +3,26 @@ package com.api.pastelwebservices.model;
 
 public class DireccionModel {
 	
-	private Long idDireccion;
 	private String avenida;
 	private String urbanizacion;
 	private String calle;
-	private String sector;
-	private String manzana;
-	private String departamento;
-	private String lote;
-	private Integer codigoPostal;
 	private String referencia;
-	private Long IdDistrito;
+	private Long idDistrito;
 	
 	public DireccionModel() {
 	}
 	
+	
 
-	public DireccionModel(Long idDireccion) {
-		this.idDireccion = idDireccion;
+	public DireccionModel(String avenida, String urbanizacion, String calle, String referencia, Long idDistrito) {
+		this.avenida = avenida;
+		this.urbanizacion = urbanizacion;
+		this.calle = calle;
+		this.referencia = referencia;
+		this.idDistrito = idDistrito;
 	}
 
 
-	public Long getIdDireccion() {
-		return idDireccion;
-	}
-
-	public void setIdDireccion(Long idDireccion) {
-		this.idDireccion = idDireccion;
-	}
 
 	public String getAvenida() {
 		return avenida;
@@ -56,46 +48,6 @@ public class DireccionModel {
 		this.calle = calle;
 	}
 
-	public String getSector() {
-		return sector;
-	}
-
-	public void setSector(String sector) {
-		this.sector = sector;
-	}
-
-	public String getManzana() {
-		return manzana;
-	}
-
-	public void setManzana(String manzana) {
-		this.manzana = manzana;
-	}
-
-	public String getDepartamento() {
-		return departamento;
-	}
-
-	public void setDepartamento(String departamento) {
-		this.departamento = departamento;
-	}
-
-	public String getLote() {
-		return lote;
-	}
-
-	public void setLote(String lote) {
-		this.lote = lote;
-	}
-
-	public Integer getCodigoPostal() {
-		return codigoPostal;
-	}
-
-	public void setCodigoPostal(Integer codigoPostal) {
-		this.codigoPostal = codigoPostal;
-	}
-
 	public String getReferencia() {
 		return referencia;
 	}
@@ -104,16 +56,20 @@ public class DireccionModel {
 		this.referencia = referencia;
 	}
 
-
 	public Long getIdDistrito() {
-		return IdDistrito;
+		return idDistrito;
 	}
-
 
 	public void setIdDistrito(Long idDistrito) {
-		IdDistrito = idDistrito;
+		this.idDistrito = idDistrito;
 	}
 
+	@Override
+	public String toString() {
+		return "DireccionModel [avenida=" + avenida + ", urbanizacion=" + urbanizacion + ", calle=" + calle
+				+ ", referencia=" + referencia + ", idDistrito=" + idDistrito + "]";
+	}
+	
 	
 	
 }

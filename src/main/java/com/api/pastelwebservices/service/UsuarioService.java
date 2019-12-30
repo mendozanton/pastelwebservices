@@ -45,29 +45,23 @@ public class UsuarioService implements ServiceCrud<Usuario>{
 
 	public void registrarUsuario(Usuario usuario) {
 		dao.registrarUsuarioBasico(
+				usuario.getNombre(),
+				usuario.getApellido(),
+				usuario.getNacimiento(),
+				usuario.getTelefono(),
+				usuario.getSexo().getIdUsuarioSexo(),
 				usuario.getEmail(), 
 				usuario.getPassword());
+	}	
+	
+	public void guardarDireccion(Long idDireccion, DireccionModel direccion) {
+		dao.registrarDireccion(direccion.getAvenida(), direccion.getCalle(), direccion.getReferencia(),
+				direccion.getUrbanizacion(), idDireccion, direccion.getIdDistrito());
+		dao.actualizarClienteDireccion(idDireccion, idDireccion);
 	}
 	
 	
-	public void guardarDireccion(Long iddireccion,DireccionModel direccion) {
-		dao.registrarDireccion(direccion.getAvenida(), direccion.getCalle(), direccion.getCodigoPostal(),
-				direccion.getDepartamento(), direccion.getLote(), direccion.getManzana(), direccion.getSector(), 
-				direccion.getUrbanizacion(), iddireccion, direccion.getIdDistrito());
-	}
-	
-	public void editar(Usuario usuario) {
-		dao.editarUsuario(
-				usuario.getNombre(), 
-				usuario.getApellido(), 
-				usuario.getEdad(), 
-				usuario.getTelefono(), 
-				usuario.getSexo().getIdUsuarioSexo(), 
-				usuario.getIdUsuario()
-				);
-	}
-	
-	public void editarClienteDireccion(Long idusuario, Long iddireccion) {
+	public void actualizarClienteDireccion(Long idusuario, Long iddireccion) {
 		dao.actualizarClienteDireccion(iddireccion, idusuario);
 	}
 
@@ -76,7 +70,18 @@ public class UsuarioService implements ServiceCrud<Usuario>{
 		// TODO Auto-generated method stub
 		
 	}
-
+	public void actualizarEmail(Long idusuario, String email) {
+		dao.actualizarEmailCliente(email, idusuario);
+		
+	}
+	public void actualizarTelefono(Long idusuario, Integer telefono) {
+		dao.actualizarTelefCliente(telefono, idusuario);
+		
+	}
+	public void actualizarPass(Long idusuario, String passwd) {
+		dao.actualizarPasswCliente(passwd, idusuario);
+		
+	}
 	@Override
 	public void guardar(Usuario object) {
 		// TODO Auto-generated method stub

@@ -32,21 +32,6 @@ public class Direccion {
 	@Column(name = "calle_dir", length = 50)
 	private String calle;
 	
-	@Column(name = "sect_dir", length = 50)
-	private String sector;
-	
-	@Column(name = "manz_dir", length = 50)
-	private String manzana;
-	
-	@Column(name = "dep_dir", length = 50)
-	private String departamento;
-	
-	@Column(name = "lot_dir", length = 10)
-	private String lote;
-	
-	@Column(name = "cod_pos_dir", length = 10, nullable = false)
-	private Integer codigoPostal;
-	
 	@Column(name = "ref_dir", length = 200, nullable = false)
 	private String referencia;
 	
@@ -62,21 +47,6 @@ public class Direccion {
 	public Direccion() {
 	}
 
-	public String getSector() {
-		return sector;
-	}
-
-	public void setSector(String sector) {
-		this.sector = sector;
-	}
-
-	public String getManzana() {
-		return manzana;
-	}
-
-	public void setManzana(String manzana) {
-		this.manzana = manzana;
-	}
 
 	public Set<Usuario> getUsuarios() {
 		return usuarios;
@@ -129,30 +99,6 @@ public class Direccion {
 
 	public void setCalle(String calle) {
 		this.calle = calle;
-	}
-
-	public String getDepartamento() {
-		return departamento;
-	}
-
-	public void setDepartamento(String departamento) {
-		this.departamento = departamento;
-	}
-
-	public String getLote() {
-		return lote;
-	}
-
-	public void setLote(String lote) {
-		this.lote = lote;
-	}
-
-	public Integer getCodigoPostal() {
-		return codigoPostal;
-	}
-
-	public void setCodigoPostal(Integer codigoPostal) {
-		this.codigoPostal = codigoPostal;
 	}
 
 	public String getReferencia() {

@@ -30,7 +30,7 @@ public class ConversionEntityModel {
 		model.setIdUsuario(usuario.getIdUsuario());
 		model.setNombre(usuario.getNombre());
 		model.setApellido(usuario.getApellido());
-		model.setEdad(usuario.getEdad());
+		//model.sete
 		model.setEmail(usuario.getEmail());
 		model.setTelefono(usuario.getTelefono());
 		model.setPassword(usuario.getPassword());
@@ -44,20 +44,15 @@ public class ConversionEntityModel {
 	
 	public static DireccionModel DireccionToModel(Direccion direccion) {
 		DireccionModel model = new DireccionModel();
-		model.setIdDireccion(direccion.getIdDireccion());
 		model.setAvenida(direccion.getAvenida());
-		model.setUrbanizacion(direccion.getUrbanizacion());
 		model.setCalle(direccion.getCalle());
-		model.setSector(direccion.getSector());
-		model.setManzana(direccion.getManzana());
-		model.setDepartamento(direccion.getDepartamento());
-		model.setLote(direccion.getLote());
-		model.setCodigoPostal(direccion.getCodigoPostal());
+		model.setUrbanizacion(direccion.getUrbanizacion());
 		model.setReferencia(direccion.getReferencia());
 		model.setIdDistrito(direccion.getDistrito().getIdDireccionDistrito());
+		
 		return model;
+		
 	}
-	
 	public static ProductoModel ProductoToModel(Producto producto) {
 		ProductoModel model = new ProductoModel();
 		model.setIdProducto(producto.getIdProducto());

@@ -1,8 +1,9 @@
 use pastel;
 
 INSERT INTO pastel.usuario_sexo (nom_sex) VALUES 
-('Masculino'),('Femenino'),
-('No prefiero no decirlo'),('Selecione su genero');
+('Seleccione su sexo'),('Masculino'),
+('Femenino'),('Prefiero no decirlo');
+
 
 INSERT INTO pastel.estado (nom_est) VALUES 
 ('Habilitado'),('Deshabilitado'),('Recien enviado'),
@@ -24,21 +25,21 @@ INSERT INTO pastel.perfil_roles (perfiles_id_per,roles_id_rol) VALUES
 (1,1),(1,2),(1,4);
 
 INSERT INTO pastel.direccion 
-(aven_dir,calle_dir,cod_pos_dir,dep_dir,lot_dir,manz_dir,ref_dir,sect_dir,urb_dir,id_dis) VALUES 
-('av. los girasoles','call falsa',8419,NULL,NULL,NULL,'al costado del colegio ''cesar vallejo''','40',NULL,1)
-,('av. los caceres',NULL,4989,'el bienestar',NULL,NULL,'junto al hotel ',NULL,'asfasfg',2)
-,('av. bla bla bla','calle falsa',22222,NULL,'0','z','esta es la referencia','este es el sector','qwerty',1);
+(aven_dir,calle_dir,ref_dir,urb_dir,id_dis) VALUES 
+('av. los girasoles','call falsa','al costado del colegio cesar vallejo',NULL,1);
 
-INSERT INTO pastel.usuario (ape_usu,eda_usu,ema_usu,nom_usu,pass_usu,tel_usu,id_dir,id_est,id_per,id_rol,id_sex) VALUES 
-('Mendoza',21,'abrmendoza32@gmail.com','Abraham','1234',924659960,3,1,1,1,1),
-(NULL,NULL,'fer@outlook.com',NULL,'1234',NULL,NULL,1,1,1,1);
+
+INSERT INTO pastel.usuario (ape_usu,nac_usu,ema_usu,nom_usu,pass_usu,tel_usu,id_dir,id_est,id_per,id_rol,id_sex) VALUES 
+('Mendoza','1998-12-09','abrmendoza32@gmail.com','Abraham','1234',924659960,1,1,1,1,1);
 
 INSERT INTO pastel.mensaje (men_mens) VALUES 
 ('Fallo validacion'),('Usuario encontrado')
 ,('Usuario creado'),('Usuario actualizado')
 ,('Producto no encontrado'),('Pedido registrado')
 ,('Compra registrado'),('Correo ya existe')
-,('Producto agregado a la cesta');
+,('Producto agregado a la cesta'),('Email actualizado')
+,('Telefono actualizado'),('Constraseña actualizada')
+,('Contraseña incorrecta');
 
 INSERT INTO pastel.error (cam_err,men_err,id_mens) VALUES 
 ('Email','Email de usuario no encontrado',1),
@@ -62,9 +63,11 @@ INSERT INTO pastel.imagen (cla_img,nom_img,src_img,id_prod) VALUES
 ,(NULL,NULL,'https://i.imgur.com/eZsHbht.jpg',3)
 ,(NULL,NULL,'https://i.imgur.com/qAGx7Is.jpg',4)
 ;
+
 INSERT INTO pastel.pedido (cod_ped,envi_ped,fec_ped,id_est,id_ped_pri,id_usu) VALUES 
-('8sgeg89','2019-12-09 15:20:06','2019-12-10 10:00:00',3,3,2)
-,('2o3gig3','2019-12-08 20:15:00','2019-12-10 22:30:00',3,3,2);
+('8sgeg89','2019-12-09 15:20:06','2019-12-10 10:00:00',3,3,1)
+,('2o3gig3','2019-12-08 20:15:00','2019-12-10 22:30:00',3,3,1);
+
 
 INSERT INTO pastel.compra (cant_comp,fech_comp,mont_comp,id_ped,id_prod) VALUES 
 (1,'2019-12-09 14:20:06',NULL,1,1);
