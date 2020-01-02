@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -24,7 +25,7 @@ public class DireccionDistrito {
 	private String nombre;
 	
 	@OneToMany(mappedBy = "distrito", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("distrito")
+	@JsonIgnore
 	private Set<Direccion> direcciones;
 
 	public DireccionDistrito() {

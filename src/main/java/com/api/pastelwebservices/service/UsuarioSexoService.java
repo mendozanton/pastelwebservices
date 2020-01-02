@@ -23,7 +23,10 @@ public class UsuarioSexoService implements ServiceCrud<UsuarioSexo>{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	public UsuarioSexo buscar(String nombre) {
+		// TODO Auto-generated method stub
+		return dao.findByNombre(nombre);
+	}
 	@Override
 	public void guardar(UsuarioSexo object) {
 		// TODO Auto-generated method stub

@@ -7,5 +7,6 @@ import com.api.pastelwebservices.entity.UsuarioSexo;
 
 @Repository
 public interface UsuarioSexoRepo extends JpaRepository<UsuarioSexo, Long>{
+	public UsuarioSexo findByNombre(String nombre);
 	
 }

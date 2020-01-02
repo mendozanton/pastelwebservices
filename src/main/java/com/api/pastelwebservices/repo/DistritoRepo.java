@@ -7,5 +7,5 @@ import com.api.pastelwebservices.entity.DireccionDistrito;
 
 @Repository
 public interface DistritoRepo extends JpaRepository<DireccionDistrito, Long>{
-
+	public DireccionDistrito findByNombre(String nombre);
 }

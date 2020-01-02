@@ -27,6 +27,7 @@ import com.api.pastelwebservices.entity.Usuario;
 import com.api.pastelwebservices.entity.UsuarioSexo;
 import com.api.pastelwebservices.model.DireccionModel;
 import com.api.pastelwebservices.model.UsuarioRegistrar;
+import com.api.pastelwebservices.model.UsuarioRegistrar2;
 import com.api.pastelwebservices.model.UsuarioUpdateEmail;
 import com.api.pastelwebservices.model.UsuarioUpdatePass;
 import com.api.pastelwebservices.model.UsuarioUpdateTelef;
@@ -82,7 +83,7 @@ public class UsuarioController {
 	}
 	
 	
-	@PostMapping(value = "/cliente")
+	@PostMapping(value = "/clienteDir")
 	public ResponseEntity<HashMap<String, Object>> crearUsuarioCliente(@Valid @RequestBody UsuarioRegistrar usuario) {
 		Mensaje mensaje;
 		if (service.buscar(usuario.getEmail()) == null) {
@@ -103,6 +104,23 @@ public class UsuarioController {
 		return new ResponseEntity<>(JsonResponseMap.getHashMap(mensaje),HttpStatus.OK);
 	}
 	
+	@PostMapping(value = "/cliente")
+	public ResponseEntity<HashMap<String, Object>> crearUsuarioClienteSinDir(@Valid @RequestBody UsuarioRegistrar2 usuario) {
+		Mensaje mensaje;
+		if (service.buscar(usuario.getEmail()) == null) {
+			Usuario u = ConversionModelEntity.UsuarioResgistrarToUsuario2(usuario);
+			service.registrarUsuario(u);
+			Long idUsuario = service.buscar(usuario.getEmail(), usuario.getPassword()).getIdUsuario();
+
+			service2.guardar(new Cesta(new Date(),new Usuario(idUsuario)));
+			
+			mensaje = service_men.buscar(MensajeCodigo.user_created);
+		} else {
+			mensaje = service_men.buscar(MensajeCodigo.correo_ya_existe);
+		}
+		//mensaje = service_men.buscar(MensajeCodigo.correo_ya_existe);
+		return new ResponseEntity<>(JsonResponseMap.getHashMap(mensaje),HttpStatus.OK);
+	}
 	
 	@PutMapping(value = "/email")
 	public ResponseEntity<HashMap<String, Object>> actualizarEmail(@Valid @RequestBody UsuarioUpdateEmail usu) {

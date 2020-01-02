@@ -2,7 +2,7 @@ use pastel;
 
 INSERT INTO pastel.usuario_sexo (nom_sex) VALUES 
 ('Seleccione su sexo'),('Masculino'),
-('Femenino'),('Prefiero no decirlo');
+('Femenino');
 
 
 INSERT INTO pastel.estado (nom_est) VALUES 
@@ -11,7 +11,7 @@ INSERT INTO pastel.estado (nom_est) VALUES
 ('Disponible');
 
 INSERT INTO pastel.direccion_distrito (nom_dis) VALUES 
-('Cercado de lima'),('Jesus Maria'),('Lince'),('Bre�a');
+('Cercado de lima'),('Jesus Maria'),('Lince'),('San borja');
 
 INSERT INTO pastel.pedido_prioridad (nom_ped_prid) VALUES 
 ('Alta'),('Media'),('Baja');

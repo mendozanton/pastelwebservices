@@ -23,7 +23,10 @@ public class DistritoService implements ServiceCrud<DireccionDistrito>{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	public DireccionDistrito buscar(String nombre) {
+		// TODO Auto-generated method stub
+		return dao.findByNombre(nombre);
+	}
 	@Override
 	public void guardar(DireccionDistrito object) {
 		// TODO Auto-generated method stub
