@@ -1,5 +1,6 @@
 package com.api.pastelwebservices.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,9 +57,18 @@ public class CestaController {
 	
 	@GetMapping(value = "/usuario={id}")
 	public ResponseEntity<HashMap<String, Object>> getCestaIdUSuario(@PathVariable("id") Long id) {
+		CestaDto2 response = new CestaDto2();
+		List<CestaProductos> cesta = service.buscarIdCesta(
+				service2.buscarPorUsuario(id).getIdCesta());
+		if (cesta.size() == 0) {
+			CestaDto2 responseNull = new CestaDto2();
+			responseNull.setIdCesta(new Long(-1));
+			responseNull.setIdUsuario(new Long(id));
+			response =  responseNull;
+		} else {
+			response= ConversionEntityModel.CestaToModel2(cesta);
+		}
 		
-		CestaDto2 response= ConversionEntityModel.CestaToModel2(service.buscarIdCesta(
-				service2.buscarPorUsuario(id).getIdCesta()));
 		
 		return new ResponseEntity<>(JsonResponseMap.getHashMap(response),HttpStatus.OK);
 	}
@@ -76,4 +87,14 @@ public class CestaController {
 		Mensaje mensaje = service_men.buscar(MensajeCodigo.prod_add_cesta);
 		return new ResponseEntity<>(JsonResponseMap.getHashMap(mensaje),HttpStatus.OK);
 	}
+	@PostMapping
+	public ResponseEntity<HashMap<String, Object>> actualizarCesta(@RequestBody  HashMap<String, ArrayList<Integer>> object){
+		ArrayList<Integer> idsCestas = object.get("idCestaProducto");
+		for (int i = 0; i < idsCestas.size(); i++) {
+			service.eliminar(new Long(idsCestas.get(i)));
+		}
+		Mensaje mensaje = new Mensaje(new Long(5),"Item eliminado");
+		return new ResponseEntity<>(JsonResponseMap.getHashMap(mensaje),HttpStatus.OK);
+	}
+	
 }

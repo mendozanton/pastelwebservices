@@ -41,7 +41,9 @@ public class CestaProdService implements ServiceCrud<CestaProductos> {
 		);
 		
 	}
-
+	public void eliminar(Long id) {
+		dao.eliminarCestaProductos(id);
+	}
 	@Override
 	public void actualizar(CestaProductos object) {
 		// TODO Auto-generated method stub

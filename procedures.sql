@@ -153,6 +153,14 @@ begin
    	values(cantidad,idCesta,idProducto,idEstado) ;
 end //
 
+create procedure EliminarCestaProductos(
+	in idCestaProducto bigint)
+begin
+    delete from pastel.cesta_productos
+   	where cesta_productos.id_cest_prod = idCestaProducto ;
+end //
+
+
 
 
 

@@ -57,11 +57,23 @@ INSERT INTO pastel.producto (des_prod,nom_prod,prec_prod,stoc_prod,id_prod_det,i
 ,('Quesos fundidos y salsa blanca','Queso',2.5,5,1,7)
 ;
 
+INSERT INTO pastel.producto (des_prod,des2_prod,nom_prod,prec_prod,stoc_prod,id_prod_det,id_est) VALUES 
+(NULL,NULL,'Delivery',4,NULL,NULL,2)
+;
+
 INSERT INTO pastel.imagen (cla_img,nom_img,src_img,id_prod) VALUES 
 (NULL,NULL,'https://i.imgur.com/c7CvSIi.jpg',1)
 ,(NULL,NULL,'https://i.imgur.com/qkNbN2O.jpg',2)
 ,(NULL,NULL,'https://i.imgur.com/eZsHbht.jpg',3)
 ,(NULL,NULL,'https://i.imgur.com/qAGx7Is.jpg',4)
+;
+
+INSERT INTO pastel.cesta (fech_cest,id_usu) VALUES 
+(NULL,1)
+;
+
+INSERT INTO pastel.cesta_productos (cant_cest_prod,id_cest,id_est,id_prod) VALUES 
+(3,1,1,3)
 ;
 
 INSERT INTO pastel.pedido (cod_ped,envi_ped,fec_ped,id_est,id_ped_pri,id_usu) VALUES 

@@ -6,8 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.api.pastelwebservices.entity.Estado;
 import com.api.pastelwebservices.entity.Producto;
 import com.api.pastelwebservices.model.ProductoModel;
+import com.api.pastelwebservices.repo.ProductoDetalleRepo;
 import com.api.pastelwebservices.repo.ProductoRepo;
 import com.api.pastelwebservices.util.ConversionEntityModel;
 
@@ -16,9 +18,10 @@ public class ProductoService implements ServiceCrud<Producto>{
 	
 	@Autowired
 	private ProductoRepo dao;
+
 	
-	public List<Producto> listarE(){
-		return dao.findAll();
+	public List<Producto> listarEst(Estado estado){
+		return dao.findByEstado(estado);
 	}
 
 	@Override
@@ -31,7 +34,6 @@ public class ProductoService implements ServiceCrud<Producto>{
 	public Producto buscar(Long id) {
 		return dao.findByIdProducto(id);
 	}
-
 	
 	@Override
 	public void actualizar(Producto object) {

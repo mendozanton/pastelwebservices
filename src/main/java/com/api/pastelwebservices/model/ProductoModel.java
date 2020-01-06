@@ -11,15 +11,14 @@ public class ProductoModel {
 	private Double precio;
 	private Integer stock;
 	private List<ImagenModel> imagenes;
-	private String detalles;
-	private String estado;
+	private Long detalle;
+	private Long estado;
 	
 	public ProductoModel() {
 	}
-	
-	
+
 	public ProductoModel(Long idProducto, String nombre, String descripcion, String descripcion2, Double precio,
-			Integer stock, List<ImagenModel> imagenes, String detalles, String estado) {
+			Integer stock, List<ImagenModel> imagenes, Long detalle, Long estado) {
 		this.idProducto = idProducto;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -27,69 +26,81 @@ public class ProductoModel {
 		this.precio = precio;
 		this.stock = stock;
 		this.imagenes = imagenes;
-		this.detalles = detalles;
+		this.detalle = detalle;
 		this.estado = estado;
 	}
 
-
-	public final String getDescripcion2() {
-		return descripcion2;
-	}
-
-
-	public final void setDescripcion2(String descripcion2) {
-		this.descripcion2 = descripcion2;
-	}
-
-
-	public final List<ImagenModel> getImagenes() {
-		return imagenes;
-	}
-	public final void setImagenes(List<ImagenModel> imagenes) {
-		this.imagenes = imagenes;
-	}
 	public Long getIdProducto() {
 		return idProducto;
 	}
+
 	public void setIdProducto(Long idProducto) {
 		this.idProducto = idProducto;
 	}
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public String getDescripcion() {
 		return descripcion;
 	}
+
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
+	public String getDescripcion2() {
+		return descripcion2;
+	}
+
+	public void setDescripcion2(String descripcion2) {
+		this.descripcion2 = descripcion2;
+	}
+
 	public Double getPrecio() {
 		return precio;
 	}
+
 	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
+
 	public Integer getStock() {
 		return stock;
 	}
+
 	public void setStock(Integer stock) {
 		this.stock = stock;
 	}
-	public String getDetalles() {
-		return detalles;
+
+	public List<ImagenModel> getImagenes() {
+		return imagenes;
 	}
-	public void setDetalles(String detalles) {
-		this.detalles = detalles;
+
+	public void setImagenes(List<ImagenModel> imagenes) {
+		this.imagenes = imagenes;
 	}
-	public String getEstado() {
+
+	public Long getDetalle() {
+		return detalle;
+	}
+
+	public void setDetalle(Long detalle) {
+		this.detalle = detalle;
+	}
+
+	public Long getEstado() {
 		return estado;
 	}
-	public void setEstado(String estado) {
+
+	public void setEstado(Long estado) {
 		this.estado = estado;
 	}
-	
+
 	
 }

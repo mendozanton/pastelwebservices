@@ -46,7 +46,7 @@ public class Producto {
 	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.ALL})
 	@JoinColumn(name = "id_prod_det", foreignKey = @ForeignKey(name = "fk_detalle_producto"))
 	@JsonIgnoreProperties("producto")
-	private ProductoDetalle detalles;
+	private ProductoDetalle detalle;
 	
 	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.ALL})
 	@JoinColumn(name = "id_est", foreignKey = @ForeignKey(name = "fk_estado_producto"))
@@ -134,12 +134,12 @@ public class Producto {
 		this.imagenes = imagenes;
 	}
 
-	public ProductoDetalle getDetalles() {
-		return detalles;
+	public ProductoDetalle getDetalle() {
+		return detalle;
 	}
 
-	public void setDetalles(ProductoDetalle detalles) {
-		this.detalles = detalles;
+	public void setDetalle(ProductoDetalle detalle) {
+		this.detalle = detalle;
 	}
 
 	public Estado getEstado() {

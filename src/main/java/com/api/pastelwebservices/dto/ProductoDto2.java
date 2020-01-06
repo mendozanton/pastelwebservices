@@ -6,6 +6,7 @@ import com.api.pastelwebservices.entity.ProductoDetalle;
 import com.api.pastelwebservices.model.ImagenModel;
 
 public class ProductoDto2 {
+	private Long idCestaProducto;
 	private Long idProducto;
 	private String nombre;
 	private String descripcion;
@@ -18,8 +19,11 @@ public class ProductoDto2 {
 	private Long idEstado;
 	
 	
-	public ProductoDto2(Long idProducto, String nombre, String descripcion, String descripcion2, Integer cantidad,
-			Double precio, Integer stock, List<ImagenModel> imagenes, Long idDetalle, Long idEstado) {
+
+
+	public ProductoDto2(Long idCestaProducto, Long idProducto, String nombre, String descripcion, String descripcion2,
+			Integer cantidad, Double precio, Integer stock, List<ImagenModel> imagenes, Long idDetalle, Long idEstado) {
+		this.idCestaProducto = idCestaProducto;
 		this.idProducto = idProducto;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -47,6 +51,16 @@ public class ProductoDto2 {
 	}
 	
 	
+	public Long getIdCestaProducto() {
+		return idCestaProducto;
+	}
+
+
+	public void setIdCestaProducto(Long idCestaProducto) {
+		this.idCestaProducto = idCestaProducto;
+	}
+
+
 	public Long getIdProducto() {
 		return idProducto;
 	}

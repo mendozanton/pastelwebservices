@@ -37,6 +37,11 @@ public class Mensaje {
 	public Mensaje() {
 	}
 
+	public Mensaje(Long codigo, @NotNull String descripcion) {
+		this.codigo = codigo;
+		this.descripcion = descripcion;
+	}
+
 	public HashMap<String, Object> getData() {
 		return data;
 	}

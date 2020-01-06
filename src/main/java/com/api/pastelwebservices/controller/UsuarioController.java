@@ -83,7 +83,7 @@ public class UsuarioController {
 	}
 	
 	
-	@PostMapping(value = "/clienteDir")
+	@PostMapping(value = "/clientedireccion")
 	public ResponseEntity<HashMap<String, Object>> crearUsuarioCliente(@Valid @RequestBody UsuarioRegistrar usuario) {
 		Mensaje mensaje;
 		if (service.buscar(usuario.getEmail()) == null) {

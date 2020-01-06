@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.api.pastelwebservices.entity.Estado;
 import com.api.pastelwebservices.entity.Mensaje;
 import com.api.pastelwebservices.entity.Producto;
 import com.api.pastelwebservices.model.ProductoModel;
@@ -32,18 +33,12 @@ public class ProductoController {
 	@Autowired
 	private MensajeService serviceM;
 	
-	@GetMapping("/all")
-	public ResponseEntity<HashMap<String, Object>> getProductosEntity() {
-		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();
-		List<Producto> productos = serviceP.listarE();		
-		hashMap.put("content", productos);
-		return new ResponseEntity<>(hashMap, HttpStatus.OK);
-	}
-	@GetMapping
-	public ResponseEntity<HashMap<String, Object>> getProductos() {
+	
+	@GetMapping("/estado={est}")
+	public ResponseEntity<HashMap<String, Object>> getProductos(@PathVariable Long est) {
 		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();
 		List<ProductoModel> productos = new ArrayList<>();
-		for (Producto p : serviceP.listar()) {
+		for (Producto p : serviceP.listarEst(new Estado(est))) {
 			productos.add(ConversionEntityModel.ProductoToModel(p));
 		}
 		hashMap.put("content", productos);

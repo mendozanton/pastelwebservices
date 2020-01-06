@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -23,8 +24,8 @@ public class ProductoDetalle {
 	@Column(name = "tip_prod_det", length = 35)
 	private String tipo;
 	
-	@OneToMany(mappedBy = "detalles", cascade = {CascadeType.MERGE, CascadeType.ALL})
-	@JsonIgnoreProperties("detalles")
+	@OneToMany(mappedBy = "detalle", cascade = {CascadeType.MERGE, CascadeType.ALL})
+	@JsonIgnore
 	private Set<Producto> producto;
 	
 	public ProductoDetalle() {

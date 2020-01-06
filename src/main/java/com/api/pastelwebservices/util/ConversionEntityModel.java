@@ -71,8 +71,8 @@ public class ConversionEntityModel {
 			model.setImagenes(imagenes);
 		} else { model.setImagenes(null);}
 		
-		model.setDetalles(producto.getDetalles()!=null?producto.getDetalles().getTipo():null);
-		model.setEstado(producto.getEstado()!=null?producto.getEstado().getNombre():null);
+		model.setDetalle(producto.getDetalle()!=null?producto.getDetalle().getIdProductoDetalle():null);
+		model.setEstado(producto.getEstado()!=null?producto.getEstado().getIdEstado():null);
 		return model;
 	}
 	
@@ -134,6 +134,7 @@ public class ConversionEntityModel {
 						im.getClasificacion()));
 			}
 	    	productos.add(new ProductoDto2(
+	    			cp.getIdCestaProductos(),
 	    			p.getIdProducto(), 
 	    			p.getNombre(), 
 	    			p.getDescripcion(), 
@@ -142,7 +143,7 @@ public class ConversionEntityModel {
 	    			p.getPrecio(), 
 	    			p.getStock(), 
 	    			imagenes, 
-	    			p.getDetalles().getIdProductoDetalle(), 
+	    			p.getDetalle().getIdProductoDetalle(), 
 	    			cp.getEstado().getIdEstado()));
 		}
 	    model.setProductos(productos);

@@ -22,4 +22,8 @@ public interface CestaProdRepo extends JpaRepository<CestaProductos, Long>{
 			@Param("idCesta") Long idCesta,
 			@Param("idProducto") Long idProducto,
 			@Param("idEstado") Long idEstado);
+	
+	@Procedure(procedureName = "EliminarCestaProductos")
+	public void eliminarCestaProductos(
+			@Param("idCestaProducto") Long idCestaProducto);
 }
