@@ -11,9 +11,9 @@ public class UsuarioModel {
 	private String password;
 	private String sexo;
 	private DireccionModel direccion;
-	private String rol;
-	private String perfil;
-	private String estado;
+	private Long rol;
+	private Long perfil;
+	private Long estado;
 	
 	public UsuarioModel() {
 	}
@@ -98,27 +98,27 @@ public class UsuarioModel {
 		this.direccion = direccion;
 	}
 
-	public String getRol() {
+	public Long getRol() {
 		return rol;
 	}
 
-	public void setRol(String rol) {
+	public void setRol(Long rol) {
 		this.rol = rol;
 	}
 
-	public String getPerfil() {
+	public Long getPerfil() {
 		return perfil;
 	}
 
-	public void setPerfil(String perfil) {
+	public void setPerfil(Long perfil) {
 		this.perfil = perfil;
 	}
 
-	public String getEstado() {
+	public Long getEstado() {
 		return estado;
 	}
 
-	public void setEstado(String estado) {
+	public void setEstado(Long estado) {
 		this.estado = estado;
 	}
 	

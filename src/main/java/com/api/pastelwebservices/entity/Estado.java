@@ -10,7 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
 
 @Entity
 public class Estado {
@@ -27,20 +29,25 @@ public class Estado {
 	private String descripcion;
 	
 	@OneToMany(mappedBy = "estado",cascade = {CascadeType.MERGE, CascadeType.ALL})
-	@JsonIgnoreProperties("estado")
+	@JsonIgnore
 	private Set<Usuario> usuarios;
 	
 	@OneToMany(mappedBy = "estado",cascade = {CascadeType.MERGE, CascadeType.ALL})
-	@JsonIgnoreProperties("estado")
+	@JsonIgnore
 	private Set<Producto> productos;
 	
 	@OneToMany(mappedBy = "estado",cascade = {CascadeType.MERGE, CascadeType.ALL})
-	@JsonIgnoreProperties("estado")
+	@JsonIgnore
 	private Set<Pedido> pedidos;
 	
 	@OneToMany(mappedBy = "estado")
-	@JsonIgnoreProperties("estado")
+	@JsonIgnore
 	private Set<CestaProductos> cestaProductos;
+	
+	@OneToMany(mappedBy = "estado")
+	@JsonIgnore
+	private Set<Menu> menus;
+	
 	
 	public Estado() {
 	}
@@ -103,6 +110,14 @@ public class Estado {
 
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
+	}
+
+	public Set<Menu> getMenus() {
+		return menus;
+	}
+
+	public void setMenus(Set<Menu> menus) {
+		this.menus = menus;
 	}
 	
 	

@@ -21,7 +21,7 @@ public class DistritoService implements ServiceCrud<DireccionDistrito>{
 	@Override
 	public DireccionDistrito buscar(Long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.findByIdDireccionDistrito(id);
 	}
 	public DireccionDistrito buscar(String nombre) {
 		// TODO Auto-generated method stub

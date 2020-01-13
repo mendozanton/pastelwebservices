@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.api.pastelwebservices.entity.Cesta;
 import com.api.pastelwebservices.entity.Direccion;
 import com.api.pastelwebservices.entity.Mensaje;
+import com.api.pastelwebservices.entity.Perfil;
+import com.api.pastelwebservices.entity.Rol;
 import com.api.pastelwebservices.entity.Usuario;
 import com.api.pastelwebservices.entity.UsuarioSexo;
 import com.api.pastelwebservices.model.DireccionModel;
@@ -88,6 +90,8 @@ public class UsuarioController {
 		Mensaje mensaje;
 		if (service.buscar(usuario.getEmail()) == null) {
 			Usuario u = ConversionModelEntity.UsuarioResgistrarToUsuario(usuario);
+			u.setRol(new Rol(new Long(2)));
+			u.setPerfil(new Perfil(new Long(3)));
 			service.registrarUsuario(u);
 			Long idUsuario = service.buscar(usuario.getEmail(), usuario.getPassword()).getIdUsuario();
 			
@@ -109,6 +113,8 @@ public class UsuarioController {
 		Mensaje mensaje;
 		if (service.buscar(usuario.getEmail()) == null) {
 			Usuario u = ConversionModelEntity.UsuarioResgistrarToUsuario2(usuario);
+			u.setRol(new Rol(new Long(2)));
+			u.setPerfil(new Perfil(new Long(3)));
 			service.registrarUsuario(u);
 			Long idUsuario = service.buscar(usuario.getEmail(), usuario.getPassword()).getIdUsuario();
 

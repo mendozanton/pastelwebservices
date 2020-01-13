@@ -44,14 +44,17 @@ public class UsuarioService implements ServiceCrud<Usuario>{
 	}
 
 	public void registrarUsuario(Usuario usuario) {
-		dao.registrarUsuarioBasico(
+		dao.registrarUsuario(
 				usuario.getNombre(),
 				usuario.getApellido(),
 				usuario.getNacimiento(),
 				usuario.getTelefono(),
 				usuario.getSexo().getIdUsuarioSexo(),
 				usuario.getEmail(), 
-				usuario.getPassword());
+				usuario.getPassword(),
+				usuario.getRol().getIdRol(),
+				usuario.getPerfil().getIdPerfil(),
+				usuario.getEstado().getIdEstado());
 	}	
 	
 	public void guardarDireccion(Long idDireccion, DireccionModel direccion) {

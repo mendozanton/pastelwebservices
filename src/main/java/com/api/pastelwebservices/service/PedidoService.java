@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.api.pastelwebservices.entity.Pedido;
+import com.api.pastelwebservices.entity.Usuario;
 import com.api.pastelwebservices.repo.PedidoRepo;
 
 @Service
@@ -22,6 +23,10 @@ public class PedidoService implements ServiceCrud<Pedido>{
 	@Override
 	public Pedido buscar(Long id) {
 		return dao.findByIdPedido(id);
+	}
+	
+	public List<Pedido> buscarPorUsuario(Long id) {
+		return dao.findByUsuario(new Usuario(id));
 	}
 	
 	public Pedido buscar(String codigo) {

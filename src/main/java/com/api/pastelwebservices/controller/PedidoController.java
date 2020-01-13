@@ -54,7 +54,15 @@ public class PedidoController {
 		PedidoModel pedido = ConversionEntityModel.PedidoToModel(service.buscar(id));
 		return new ResponseEntity<>(JsonResponseMap.getHashMap(pedido),HttpStatus.OK);
 	}
-	
+	@GetMapping(value = "/usuario={id}")
+	public ResponseEntity<HashMap<String, Object>> getPedidoIdUSuario(@PathVariable("id") Long id) {
+		List<PedidoModel> pedidos = new ArrayList<>();
+		for (Pedido p : service.buscarPorUsuario(id)) {
+			pedidos.add(ConversionEntityModel.PedidoToModel(p));
+		}
+		return new ResponseEntity<>(JsonResponseMap.getHashMap(pedidos), HttpStatus.OK);
+				
+	}
 	@PostMapping
 	public ResponseEntity<HashMap<String, Object>> registrarPedido(@Valid @RequestBody PedidoModelRegister ped) {
 		

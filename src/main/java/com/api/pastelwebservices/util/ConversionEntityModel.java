@@ -1,7 +1,6 @@
 package com.api.pastelwebservices.util;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -11,14 +10,18 @@ import com.api.pastelwebservices.entity.Cesta;
 import com.api.pastelwebservices.entity.CestaProductos;
 import com.api.pastelwebservices.entity.Compra;
 import com.api.pastelwebservices.entity.Direccion;
+import com.api.pastelwebservices.entity.Grupo;
 import com.api.pastelwebservices.entity.Imagen;
+import com.api.pastelwebservices.entity.Menu;
 import com.api.pastelwebservices.entity.Pedido;
 import com.api.pastelwebservices.entity.Producto;
 import com.api.pastelwebservices.entity.Usuario;
 import com.api.pastelwebservices.model.CompraModel;
 import com.api.pastelwebservices.model.CompraModel2;
 import com.api.pastelwebservices.model.DireccionModel;
+import com.api.pastelwebservices.model.GrupoModel;
 import com.api.pastelwebservices.model.ImagenModel;
+import com.api.pastelwebservices.model.MenuModel;
 import com.api.pastelwebservices.model.PedidoModel;
 import com.api.pastelwebservices.model.ProductoModel;
 import com.api.pastelwebservices.model.UsuarioModel;
@@ -36,9 +39,9 @@ public class ConversionEntityModel {
 		model.setPassword(usuario.getPassword());
 		model.setSexo(usuario.getSexo()!=null?usuario.getSexo().getNombre():null);
 		model.setDireccion(usuario.getDireccion()!=null?DireccionToModel(usuario.getDireccion()):null);
-		model.setRol(usuario.getRol()!=null?usuario.getRol().getNombre():null);
-		model.setPerfil(usuario.getPerfil()!=null?usuario.getPerfil().getNombre():null);
-		model.setEstado(usuario.getEstado()!=null?usuario.getEstado().getNombre():null);
+		model.setRol(usuario.getRol()!=null?usuario.getRol().getIdRol():null);
+		model.setPerfil(usuario.getPerfil()!=null?usuario.getPerfil().getIdPerfil():null);
+		model.setEstado(usuario.getEstado()!=null?usuario.getEstado().getIdEstado():null);
 		return model;
 	}
 	
@@ -66,7 +69,7 @@ public class ConversionEntityModel {
 		if(entityImg != null) {
 			List<ImagenModel> imagenes = new ArrayList<>();
 			for (Imagen i : entityImg) {
-				imagenes.add(new ImagenModel(i.getIdImagen(), i.getSource(), i.getNombre(), i.getClasificacion()));
+				imagenes.add(new ImagenModel(i.getIdImagen(), i.getSource(), i.getNombre()));
 			}
 			model.setImagenes(imagenes);
 		} else { model.setImagenes(null);}
@@ -130,8 +133,7 @@ public class ConversionEntityModel {
 				imagenes.add(new ImagenModel(
 						im.getIdImagen(), 
 						im.getSource(), 
-						im.getNombre(), 
-						im.getClasificacion()));
+						im.getNombre()));
 			}
 	    	productos.add(new ProductoDto2(
 	    			cp.getIdCestaProductos(),
@@ -150,4 +152,22 @@ public class ConversionEntityModel {
 
 		return model;
 	}
+	
+	public static GrupoModel GrupoToModel(Grupo grupo) {
+		GrupoModel model = new GrupoModel();
+		model.setIdGrupo(grupo.getIdGrupo());
+		model.setNombre(grupo.getNombre());
+		return model;
+	}
+	
+	public static MenuModel MenuToModel(Menu menu) {
+		MenuModel model = new MenuModel();
+		model.setIdMenu(menu.getIdMenu());
+		model.setNombre(menu.getNombre());
+		model.setIdGrupo(menu.getGrupo().getIdGrupo());
+		model.setIdEstado(menu.getEstado().getIdEstado());
+		model.setRuta(menu.getRuta());
+		return model;
+	}
 }
+

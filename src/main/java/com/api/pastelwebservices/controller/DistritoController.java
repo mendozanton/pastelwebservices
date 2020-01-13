@@ -29,12 +29,17 @@ public class DistritoController {
 	@Autowired private DistritoService service;
 	
 	@GetMapping
-	public ResponseEntity<HashMap<String, Object>> getUsuarios() {
+	public ResponseEntity<HashMap<String, Object>> getDireciones() {
 		List<DistritoModel> DistritoModel = new ArrayList<>();
 		for (DireccionDistrito d : service.listar()) {
 			DistritoModel.add(new DistritoModel(d.getIdDireccionDistrito(),d.getNombre()));
 		}
 		return new ResponseEntity<>(JsonResponseMap.getHashMap(DistritoModel), HttpStatus.OK);
+	}
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<HashMap<String, Object>> getDireccionId(@PathVariable("id") Long id) {
+		DireccionDistrito distrito = service.buscar(id);
+		return new ResponseEntity<>(JsonResponseMap.getHashMap(distrito), HttpStatus.OK);
 	}
 	@PostMapping
 	public ResponseEntity<HashMap<String, Object>> getUsuarioId(@RequestBody HashMap<String, String> object) {

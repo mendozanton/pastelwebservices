@@ -2,14 +2,17 @@ use pastel;
 
 DELIMITER //
  
-create procedure registrarCliente(
+create procedure registrarUsuario(
 	in nombre varchar(30),
 	in apellido varchar(30),
 	in nacimiento datetime,
 	in telefono int,
 	in idsexo bigint,
 	in email varchar(320),
-	in passwd varchar(12))
+	in passwd varchar(12),
+	in idrol bigint,
+	in idperfil bigint,
+	in idestado bigint)
 begin
     insert into pastel.usuario(
     	usuario.nom_usu,
@@ -23,8 +26,9 @@ begin
     	usuario.id_per,
     	usuario.id_est) 
    	values(nombre, apellido, nacimiento, 
-   	telefono, idsexo, email, passwd,4,1,1) ;
+   	telefono, idsexo, email, passwd,idrol,idperfil,idestado) ;
 end //
+
 
 
 create procedure RegistrarDireccion(

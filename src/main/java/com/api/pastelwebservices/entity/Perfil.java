@@ -36,11 +36,21 @@ public class Perfil {
 	@JsonIgnore
 	private Set<Rol> roles;
 	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_men", foreignKey = @ForeignKey(name = "fk_perfil_menu"))
+	//@JsonIgnoreProperties("perfiles")
+	@JsonIgnore
+	private Set<Menu> menus;
+	
 	@OneToMany(mappedBy = "rol")
-	@JsonIgnoreProperties("perfil")
+	@JsonIgnore
 	private Set<Usuario> usuarios;
 
 	public Perfil() {
+	}
+
+	public Perfil(Long idPerfil) {
+		this.idPerfil = idPerfil;
 	}
 
 	public Long getIdPerfil() {
@@ -82,6 +92,16 @@ public class Perfil {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
+	public Set<Menu> getMenus() {
+		return menus;
+	}
+
+	public void setMenus(Set<Menu> menus) {
+		this.menus = menus;
+	}
+	
+	
 	
 	
 }

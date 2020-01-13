@@ -5,16 +5,16 @@ public class ImagenModel {
 	private Long idImagen;
 	private String source;
 	private String nombre;
-	private String clasificacion;
+
 	
 	public ImagenModel() {
 	}
 
-	public ImagenModel(Long idImagen, String source, String nombre, String clasificacion) {
+	public ImagenModel(Long idImagen, String source, String nombre) {
 		this.idImagen = idImagen;
 		this.source = source;
 		this.nombre = nombre;
-		this.clasificacion = clasificacion;
+	
 	}
 
 	public final Long getIdImagen() {
@@ -41,13 +41,5 @@ public class ImagenModel {
 		this.nombre = nombre;
 	}
 
-	public final String getClasificacion() {
-		return clasificacion;
-	}
 
-	public final void setClasificacion(String clasificacion) {
-		this.clasificacion = clasificacion;
-	}
-	
-	
 }

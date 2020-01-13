@@ -16,15 +16,18 @@ public interface UsuarioRepo extends JpaRepository<Usuario, Long> {
 	public Usuario findByEmail(String email);
 	public Usuario findByIdUsuario(Long idUsuario);
 	
-	@Procedure(procedureName = "registrarCliente")
-	public void registrarUsuarioBasico(
+	@Procedure(procedureName = "registrarUsuario")
+	public void registrarUsuario(
 			@Param("nombre") String nombre,
 			@Param("apellido") String apellido,
 			@Param("nacimiento") Date nacimiento,
 			@Param("telefono") Integer telefono,
 			@Param("idsexo") Long idsexo,
 			@Param("email") String email,
-			@Param("passwd") String password);
+			@Param("passwd") String password,
+			@Param("idrol") Long idrol,
+			@Param("idperfil") Long idperfil,
+			@Param("idestado") Long idestado);
 	
 	@Procedure(procedureName = "RegistrarDireccion")
 	public void registrarDireccion(

@@ -27,9 +27,6 @@ public class Imagen {
 	
 	@Column(name = "nom_img",length = 30)
 	private String nombre;
-
-	@Column(name = "cla_img",length = 20)
-	private String clasificacion;
 	
 	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.ALL})
 	@JoinColumn(name = "id_prod", foreignKey = @ForeignKey(name = "fk_producto_imagen"))
@@ -40,13 +37,6 @@ public class Imagen {
 		
 	}
 
-	public String getClasificacion() {
-		return clasificacion;
-	}
-
-	public void setClasificacion(String clasificacion) {
-		this.clasificacion = clasificacion;
-	}
 
 	public Long getIdImagen() {
 		return idImagen;
