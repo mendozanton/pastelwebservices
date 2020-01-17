@@ -69,7 +69,7 @@ public class MenuController {
 	
 						@Override
 						public int compare(Grupo o1, Grupo o2) {
-							return new Long(o1.getIdGrupo()).compareTo(new Long(o2.getIdGrupo()));
+							return o1.getIdGrupo().compareTo(o2.getIdGrupo());
 						}
 					});
 					
@@ -89,6 +89,14 @@ public class MenuController {
 					for (Menu m : perfil.getMenus()) {
 						menus.add(ConversionEntityModel.MenuToModel(m));
 					}
+					Collections.sort(menus, new Comparator<MenuModel>() {
+
+						@Override
+						public int compare(MenuModel o1, MenuModel o2) {
+							// TODO Auto-generated method stub
+							return o1.getIdMenu().compareTo(o2.getIdMenu());
+						}
+					});
 					response = JsonResponseMap.getHashMap(menus);
 				}
 				

@@ -27,10 +27,4 @@ public class MensajeController {
 		hashMap.put("content", service_men.listar());
 		return new ResponseEntity<>(hashMap, HttpStatus.OK);
 	}
-	@GetMapping("/debug")
-	private ResponseEntity<HashMap<String, Object>> getMensaje2() {
-		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();
-		
-		return new ResponseEntity<>(hashMap, HttpStatus.OK);
-	}
 }

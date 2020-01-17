@@ -42,7 +42,7 @@ public class DistritoController {
 		return new ResponseEntity<>(JsonResponseMap.getHashMap(distrito), HttpStatus.OK);
 	}
 	@PostMapping
-	public ResponseEntity<HashMap<String, Object>> getUsuarioId(@RequestBody HashMap<String, String> object) {
+	public ResponseEntity<HashMap<String, Object>> getDireccionId(@RequestBody HashMap<String, String> object) {
 		String nombre = object.get("nombre");
 		DireccionDistrito distrito = service.buscar(nombre);
 		

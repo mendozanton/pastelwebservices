@@ -33,7 +33,7 @@ public class ConversionEntityModel {
 		model.setIdUsuario(usuario.getIdUsuario());
 		model.setNombre(usuario.getNombre());
 		model.setApellido(usuario.getApellido());
-		//model.sete
+		model.setNacimiento(usuario.getNacimiento());;
 		model.setEmail(usuario.getEmail());
 		model.setTelefono(usuario.getTelefono());
 		model.setPassword(usuario.getPassword());

@@ -45,8 +45,6 @@ public class CestaController {
 	@Autowired private CestaService service2;
 	@Autowired private MensajeService service_men;
 	
-	
-	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<HashMap<String, Object>> getCestaIdCesta(@PathVariable("id") Long id) {
 	
@@ -88,7 +86,7 @@ public class CestaController {
 		return new ResponseEntity<>(JsonResponseMap.getHashMap(mensaje),HttpStatus.OK);
 	}
 	@PostMapping
-	public ResponseEntity<HashMap<String, Object>> actualizarCesta(@RequestBody  HashMap<String, ArrayList<Integer>> object){
+	public ResponseEntity<HashMap<String, Object>> eliminarItemsCesta(@RequestBody  HashMap<String, ArrayList<Integer>> object){
 		ArrayList<Integer> idsCestas = object.get("idCestaProducto");
 		for (int i = 0; i < idsCestas.size(); i++) {
 			service.eliminar(new Long(idsCestas.get(i)));
@@ -96,5 +94,6 @@ public class CestaController {
 		Mensaje mensaje = new Mensaje(new Long(5),"Item eliminado");
 		return new ResponseEntity<>(JsonResponseMap.getHashMap(mensaje),HttpStatus.OK);
 	}
+	
 	
 }

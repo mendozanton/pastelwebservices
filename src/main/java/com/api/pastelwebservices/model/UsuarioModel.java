@@ -1,11 +1,13 @@
 package com.api.pastelwebservices.model;
 
+import java.util.Date;
+
 public class UsuarioModel {
 	
 	private Long idUsuario;
 	private String nombre;
 	private String apellido;
-	private Integer edad;
+	private Date nacimiento;
 	private String email;
 	private Integer telefono;
 	private String password;
@@ -18,11 +20,11 @@ public class UsuarioModel {
 	public UsuarioModel() {
 	}
 
-	public UsuarioModel(Long idUsuario, String nombre, String apellido, Integer edad, Integer telefono) {
+	public UsuarioModel(Long idUsuario, String nombre, String apellido, Date nacimiento, Integer telefono) {
 		this.idUsuario = idUsuario;
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.edad = edad;
+		this.nacimiento = nacimiento;
 		this.telefono = telefono;
 	}
 
@@ -50,12 +52,13 @@ public class UsuarioModel {
 		this.apellido = apellido;
 	}
 
-	public Integer getEdad() {
-		return edad;
+	
+	public Date getNacimiento() {
+		return nacimiento;
 	}
 
-	public void setEdad(Integer edad) {
-		this.edad = edad;
+	public void setNacimiento(Date nacimiento) {
+		this.nacimiento = nacimiento;
 	}
 
 	public String getEmail() {

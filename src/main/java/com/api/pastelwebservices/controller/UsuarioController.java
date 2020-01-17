@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.pastelwebservices.entity.Cesta;
 import com.api.pastelwebservices.entity.Direccion;
+import com.api.pastelwebservices.entity.Estado;
 import com.api.pastelwebservices.entity.Mensaje;
 import com.api.pastelwebservices.entity.Perfil;
 import com.api.pastelwebservices.entity.Rol;
@@ -73,17 +74,6 @@ public class UsuarioController {
 		return new ResponseEntity<>(JsonResponseMap.getHashMap(usuariosModel), HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/sexo")
-	public ResponseEntity<HashMap<String, Object>> getSexo() {
-		
-		List<UsuarioSexoModel> listSex = new ArrayList<>();
-		
-		for (UsuarioSexo s : service3.listar()) {
-			listSex.add(new UsuarioSexoModel(s.getIdUsuarioSexo(), s.getNombre()));
-		}
-		return new ResponseEntity<>(JsonResponseMap.getHashMap(listSex), HttpStatus.OK);
-	}
-	
 	
 	@PostMapping(value = "/clientedireccion")
 	public ResponseEntity<HashMap<String, Object>> crearUsuarioCliente(@Valid @RequestBody UsuarioRegistrar usuario) {
@@ -110,11 +100,15 @@ public class UsuarioController {
 	
 	@PostMapping(value = "/cliente")
 	public ResponseEntity<HashMap<String, Object>> crearUsuarioClienteSinDir(@Valid @RequestBody UsuarioRegistrar2 usuario) {
+		//System.out.println(usuario);
+		//System.out.println(service.buscar(usuario.getEmail()));
 		Mensaje mensaje;
 		if (service.buscar(usuario.getEmail()) == null) {
 			Usuario u = ConversionModelEntity.UsuarioResgistrarToUsuario2(usuario);
+			//System.out.println("usu: " + u);
 			u.setRol(new Rol(new Long(2)));
 			u.setPerfil(new Perfil(new Long(3)));
+			u.setEstado(new Estado(new Long(1)));
 			service.registrarUsuario(u);
 			Long idUsuario = service.buscar(usuario.getEmail(), usuario.getPassword()).getIdUsuario();
 
