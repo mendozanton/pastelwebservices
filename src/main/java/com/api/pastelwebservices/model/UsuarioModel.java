@@ -2,6 +2,10 @@ package com.api.pastelwebservices.model;
 
 import java.util.Date;
 
+import com.api.pastelwebservices.entity.Estado;
+import com.api.pastelwebservices.entity.Perfil;
+import com.api.pastelwebservices.entity.Rol;
+
 public class UsuarioModel {
 	
 	private Long idUsuario;
@@ -13,9 +17,9 @@ public class UsuarioModel {
 	private String password;
 	private String sexo;
 	private DireccionModel direccion;
-	private Long rol;
-	private Long perfil;
-	private Long estado;
+	private Rol rol;
+	private Perfil perfil;
+	private Estado estado;
 	
 	public UsuarioModel() {
 	}
@@ -52,7 +56,6 @@ public class UsuarioModel {
 		this.apellido = apellido;
 	}
 
-	
 	public Date getNacimiento() {
 		return nacimiento;
 	}
@@ -101,29 +104,30 @@ public class UsuarioModel {
 		this.direccion = direccion;
 	}
 
-	public Long getRol() {
+	public Rol getRol() {
 		return rol;
 	}
 
-	public void setRol(Long rol) {
+	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
 
-	public Long getPerfil() {
+	public Perfil getPerfil() {
 		return perfil;
 	}
 
-	public void setPerfil(Long perfil) {
+	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
 	}
 
-	public Long getEstado() {
+	public Estado getEstado() {
 		return estado;
 	}
 
-	public void setEstado(Long estado) {
+	public void setEstado(Estado estado) {
 		this.estado = estado;
 	}
+
 	
 	
 	

@@ -7,6 +7,7 @@ import com.api.pastelwebservices.entity.Perfil;
 
 @Repository
 public interface PerfilRepo extends JpaRepository<Perfil, Long>{
+	
 	public Perfil findByIdPerfil(Long idPerfil);
 	
 }

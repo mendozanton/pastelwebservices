@@ -39,9 +39,14 @@ public class ConversionEntityModel {
 		model.setPassword(usuario.getPassword());
 		model.setSexo(usuario.getSexo()!=null?usuario.getSexo().getNombre():null);
 		model.setDireccion(usuario.getDireccion()!=null?DireccionToModel(usuario.getDireccion()):null);
+		model.setRol(usuario.getRol());
+		model.setPerfil(usuario.getPerfil());
+		model.setEstado(usuario.getEstado());
+		/*
 		model.setRol(usuario.getRol()!=null?usuario.getRol().getIdRol():null);
 		model.setPerfil(usuario.getPerfil()!=null?usuario.getPerfil().getIdPerfil():null);
 		model.setEstado(usuario.getEstado()!=null?usuario.getEstado().getIdEstado():null);
+		*/
 		return model;
 	}
 	

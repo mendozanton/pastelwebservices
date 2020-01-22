@@ -57,4 +57,9 @@ public interface UsuarioRepo extends JpaRepository<Usuario, Long> {
 	public void actualizarPasswCliente(
 			@Param("passwd") String passwd,
 			@Param("idusuario") Long idusuario);
+	@Procedure(procedureName = "ActualizarPerfilRol")
+	public void actualizarPerfilRol(
+			@Param("idusuario") Long idusuario,
+			@Param("idrol") Long idrol,
+			@Param("idperfil") Long idperfil);
 }

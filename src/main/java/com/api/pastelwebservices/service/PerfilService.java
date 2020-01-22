@@ -16,12 +16,11 @@ public class PerfilService implements ServiceCrud<Perfil>{
 	@Override
 	public List<Perfil> listar() {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.findAll();
 	}
 
 	@Override
 	public Perfil buscar(Long id) {
-		// TODO Auto-generated method stub
 		return dao.findByIdPerfil(id);
 	}
 

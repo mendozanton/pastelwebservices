@@ -15,5 +15,9 @@ public class MensajeCodigo {
 	public static final Long user_updated_telef = new Long(11);
 	public static final Long user_updated_passw = new Long(12);
 	public static final Long user_passw_no_valid = new Long(13);
+	public static final Long perfil_err_asoc = new Long(14);
+	public static final Long perfil_err_menu = new Long(15);
 	public static final Long request_succes = new Long(16);
+	public static final Long update_succes= new Long(17);
+	public static final Long delete_succes= new Long(18);
 }

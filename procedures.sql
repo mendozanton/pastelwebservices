@@ -89,6 +89,16 @@ begin
    	where usuario.id_usu = idusuario ;
 end //
 
+create procedure ActualizarPerfilRol(
+	in idusuario bigint,
+	in idrol bigint,
+	in idperfil bigint)
+begin
+    update pastel.usuario set 
+    	usuario.id_rol = idrol,
+    	usuario.id_per = idperfil
+   	where usuario.id_usu = idusuario ;
+end //
 
 create procedure RegistarCompra(
 	in cantidad int,

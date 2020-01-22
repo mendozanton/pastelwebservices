@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -71,15 +72,15 @@ public class Usuario {
 	private Estado estado;
 	
 	@OneToMany(mappedBy = "usuario",cascade = {CascadeType.MERGE, CascadeType.ALL})
-	@JsonIgnoreProperties("usuario")
+	@JsonIgnore
 	private Set<Pedido> pedidos;
 	
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("usuario")
+	@JsonIgnore
 	private Set<Preferencia> preferencias;
 	
 	@OneToMany(mappedBy = "usuario")
-	@JsonIgnoreProperties("usuario")
+	@JsonIgnore
 	private Set<Cesta> cestas;
 	
 	

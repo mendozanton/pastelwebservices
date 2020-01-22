@@ -85,6 +85,10 @@ public class UsuarioService implements ServiceCrud<Usuario>{
 		dao.actualizarPasswCliente(passwd, idusuario);
 		
 	}
+	public void actualizarPerfilRol(Long idusuario, Long idrol,Long idperfil) {
+		dao.actualizarPerfilRol(idusuario, idrol, idperfil);
+		
+	}
 	@Override
 	public void guardar(Usuario object) {
 		// TODO Auto-generated method stub

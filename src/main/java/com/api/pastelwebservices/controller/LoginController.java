@@ -6,16 +6,20 @@ import java.util.LinkedHashMap;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.api.pastelwebservices.entity.Mensaje;
 import com.api.pastelwebservices.entity.Usuario;
+import com.api.pastelwebservices.model.RecaptchaResponse;
 import com.api.pastelwebservices.model.UserCredential;
 import com.api.pastelwebservices.service.MensajeService;
 import com.api.pastelwebservices.service.UsuarioService;
@@ -31,28 +35,41 @@ public class LoginController {
 	@Autowired
 	private MensajeService service_men;
 	
+	@Autowired
+	private RestTemplate restTemplate;
 	@PostMapping
 	public ResponseEntity<HashMap<String, Object>> credenciales(@Valid @RequestBody UserCredential login) {
+		String url = "https://www.google.com/recaptcha/api/siteverify";
+		String params = "?secret=6Ld4btAUAAAAAPMkb3xPv48sHu_38BoFvS__fbVy&response="+login.getResponseCaptcha();
 		
 		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();		
 		Usuario usuario = service_usu.buscar(login.getEmail(), login.getPassword());
 		Mensaje mensaje = new Mensaje();
-		if (usuario == null) {
-			mensaje = service_men.buscar(new Long(1));
-			hashMap.put("content", mensaje);
-		} else {
-			if (usuario.getPassword().equals(login.getPassword())) {
-				mensaje = service_men.buscar(new Long(2));
-				HashMap<String, Object> hashMap2 = new LinkedHashMap<String, Object>();
-				hashMap2.put("idUsuario", usuario.getIdUsuario());
-				mensaje.setData(hashMap2);
+		
+		RecaptchaResponse recaptchaResponse = restTemplate.exchange(url+params, HttpMethod.POST, null, RecaptchaResponse.class).getBody();
+		if (recaptchaResponse.isSuccess()) {
+			
+			if (usuario == null) {
+				mensaje = service_men.buscar(new Long(1));
 				hashMap.put("content", mensaje);
-				
 			} else {
-				mensaje = service_men.buscarErrorEspecifico(new Long(2));
-				hashMap.put("content", mensaje);
+				if (usuario.getPassword().equals(login.getPassword())) {
+					mensaje = service_men.buscar(new Long(2));
+					HashMap<String, Object> hashMap2 = new LinkedHashMap<String, Object>();
+					hashMap2.put("idUsuario", usuario.getIdUsuario());
+					mensaje.setData(hashMap2);
+					hashMap.put("content", mensaje);
+					
+				} else {
+					mensaje = service_men.buscarErrorEspecifico(new Long(2));
+					hashMap.put("content", mensaje);
+				}
 			}
+		}else {
+			mensaje = service_men.buscarErrorEspecifico(new Long(2));
+			hashMap.put("content", mensaje);
 		}
+		
 		
 		return new ResponseEntity<>(hashMap, HttpStatus.OK);
 	}

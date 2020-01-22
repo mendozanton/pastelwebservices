@@ -4,15 +4,46 @@ public class UserCredential {
 	
 	private String email;
 	private String password;
+	private String responseCaptcha;
+	
 	
 	public UserCredential() {
 	}
 
 	
-	public UserCredential(String email, String password) {
+
+
+	@Override
+	public String toString() {
+		return "UserCredential [email=" + email + ", password=" + password + ", responseCaptcha=" + responseCaptcha
+				+ "]";
+	}
+
+
+
+
+	public UserCredential(String email, String password, String responseCaptcha) {
 		this.email = email;
 		this.password = password;
+		this.responseCaptcha = responseCaptcha;
 	}
+
+
+
+
+	public String getResponseCaptcha() {
+		return responseCaptcha;
+	}
+
+
+
+
+	public void setResponseCaptcha(String responseCaptcha) {
+		this.responseCaptcha = responseCaptcha;
+	}
+
+
+
 
 	public String getEmail() {
 		return email;

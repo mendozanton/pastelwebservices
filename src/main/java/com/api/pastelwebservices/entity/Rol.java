@@ -29,7 +29,7 @@ public class Rol {
 	private String descripcion;
 
 	@ManyToMany(mappedBy = "roles",cascade = CascadeType.ALL)
-	@JsonIgnoreProperties("roles")
+	@JsonIgnore
 	private Set<Perfil> perfiles;
 	
 	@OneToMany(mappedBy = "rol",cascade = CascadeType.ALL)

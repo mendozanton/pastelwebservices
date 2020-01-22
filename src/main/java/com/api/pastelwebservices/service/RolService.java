@@ -16,16 +16,14 @@ public class RolService implements ServiceCrud<Rol>{
 	@Override
 	public List<Rol> listar() {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.findAll();
 	}
 
 	@Override
 	public Rol buscar(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.findByIdRol(id);
 	}
 	public Rol buscarRolPerfil(Long id, Perfil perfil) {
-		// TODO Auto-generated method stub
 		return dao.findByIdRolAndPerfiles(id, perfil);
 	}
 	@Override

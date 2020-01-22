@@ -33,6 +33,7 @@ import com.api.pastelwebservices.model.UsuarioRegistrar;
 import com.api.pastelwebservices.model.UsuarioRegistrar2;
 import com.api.pastelwebservices.model.UsuarioUpdateEmail;
 import com.api.pastelwebservices.model.UsuarioUpdatePass;
+import com.api.pastelwebservices.model.UsuarioUpdateRolPerfil;
 import com.api.pastelwebservices.model.UsuarioUpdateTelef;
 import com.api.pastelwebservices.model.UsuarioModel;
 import com.api.pastelwebservices.model.UsuarioSexoModel;
@@ -60,18 +61,27 @@ public class UsuarioController {
 	
 	@GetMapping
 	public ResponseEntity<HashMap<String, Object>> getUsuarios() {
+		/*
 		List<UsuarioModel> usuariosModel = new ArrayList<>();
 		for (Usuario usuario : service.listar()) {
 			usuariosModel.add(ConversionEntityModel.UsuarioToModel(usuario));
 		}
 		return new ResponseEntity<>(JsonResponseMap.getHashMap(usuariosModel), HttpStatus.OK);
+		*/
+		List<Usuario> usuarios = service.listar();
+		
+		return new ResponseEntity<>(JsonResponseMap.getHashMap(usuarios), HttpStatus.OK);
+		
 	}
 	
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<HashMap<String, Object>> getUsuarioId(@PathVariable("id") Long id) {
-		Usuario usuario = service.buscar(id);
+		/*Usuario usuario = service.buscar(id);
 		UsuarioModel usuariosModel = ConversionEntityModel.UsuarioToModel(usuario);
-		return new ResponseEntity<>(JsonResponseMap.getHashMap(usuariosModel), HttpStatus.OK);
+		return new ResponseEntity<>(JsonResponseMap.getHashMap(usuariosModel), HttpStatus.OK);*/
+		Usuario usuario = service.buscar(id);
+		
+		return new ResponseEntity<>(JsonResponseMap.getHashMap(usuario), HttpStatus.OK);
 	}
 	
 	
@@ -151,6 +161,13 @@ public class UsuarioController {
 		}
 		
 
+		return new ResponseEntity<>(JsonResponseMap.getHashMap(mensaje),HttpStatus.OK);
+	}
+	@PutMapping(value = "/perfilrol")
+	public ResponseEntity<HashMap<String, Object>> actualizarRolPerfil(@Valid @RequestBody UsuarioUpdateRolPerfil usu) {
+		Mensaje mensaje = new Mensaje();
+		mensaje = service_men.buscar(MensajeCodigo.update_succes);
+		service.actualizarPerfilRol(usu.getIdUsuario(), usu.getIdRol(), usu.getIdPerfil());
 		return new ResponseEntity<>(JsonResponseMap.getHashMap(mensaje),HttpStatus.OK);
 	}
 }
