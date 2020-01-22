@@ -21,6 +21,7 @@ import com.api.pastelwebservices.entity.Mensaje;
 import com.api.pastelwebservices.entity.Usuario;
 import com.api.pastelwebservices.model.RecaptchaResponse;
 import com.api.pastelwebservices.model.UserCredential;
+import com.api.pastelwebservices.model.UserCredential2;
 import com.api.pastelwebservices.service.MensajeService;
 import com.api.pastelwebservices.service.UsuarioService;
 
@@ -37,7 +38,7 @@ public class LoginController {
 	
 	@Autowired
 	private RestTemplate restTemplate;
-	@PostMapping
+	@PostMapping("/web")
 	public ResponseEntity<HashMap<String, Object>> credenciales(@Valid @RequestBody UserCredential login) {
 		String url = "https://www.google.com/recaptcha/api/siteverify";
 		String params = "?secret=6Ld4btAUAAAAAPMkb3xPv48sHu_38BoFvS__fbVy&response="+login.getResponseCaptcha();
@@ -69,6 +70,35 @@ public class LoginController {
 			mensaje = service_men.buscarErrorEspecifico(new Long(2));
 			hashMap.put("content", mensaje);
 		}
+		
+		
+		return new ResponseEntity<>(hashMap, HttpStatus.OK);
+	}
+	
+	@PostMapping("/movil")
+	public ResponseEntity<HashMap<String, Object>> credenciales2(@Valid @RequestBody UserCredential2 login) {
+		
+		
+		HashMap<String, Object> hashMap = new LinkedHashMap<String, Object>();		
+		Usuario usuario = service_usu.buscar(login.getEmail(), login.getPassword());
+		Mensaje mensaje = new Mensaje();
+		
+			if (usuario == null) {
+				mensaje = service_men.buscar(new Long(1));
+				hashMap.put("content", mensaje);
+			} else {
+				if (usuario.getPassword().equals(login.getPassword())) {
+					mensaje = service_men.buscar(new Long(2));
+					HashMap<String, Object> hashMap2 = new LinkedHashMap<String, Object>();
+					hashMap2.put("idUsuario", usuario.getIdUsuario());
+					mensaje.setData(hashMap2);
+					hashMap.put("content", mensaje);
+					
+				} else {
+					mensaje = service_men.buscarErrorEspecifico(new Long(2));
+					hashMap.put("content", mensaje);
+				}
+			}
 		
 		
 		return new ResponseEntity<>(hashMap, HttpStatus.OK);
