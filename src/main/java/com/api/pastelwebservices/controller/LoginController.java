@@ -36,9 +36,7 @@ public class LoginController {
 	@Autowired
 	private MensajeService service_men;
 	
-	@Autowired
-	private RestTemplate restTemplate;
-	
+
 	
 	@PostMapping
 	public ResponseEntity<HashMap<String, Object>> credenciales2(@Valid @RequestBody UserCredential login) {
