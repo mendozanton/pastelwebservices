@@ -12,9 +12,5 @@ public class PastelwebservicesApplication {
 		SpringApplication.run(PastelwebservicesApplication.class, args);
 	}
 	
-	@Bean
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
-
+	
 }
